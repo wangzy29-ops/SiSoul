@@ -1,0 +1,42 @@
+
+> frontend@0.0.0 dev
+> vite
+
+
+  VITE v7.3.1  ready in 150 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+2:29:08 PM [vite] (client) hmr update /src/pages/knowledge/Documents.jsx
+2:29:11 PM [vite] (client) hmr update /src/pages/knowledge/DocumentDetail.jsx
+2:29:11 PM [vite] (client) hmr update /src/pages/knowledge/DocumentDetail.jsx
+2:29:13 PM [vite] (client) hmr update /src/pages/knowledge/Videos.jsx
+2:29:34 PM [vite] (client) hmr update /src/pages/knowledge/Audios.jsx
+2:29:39 PM [vite] (client) hmr update /src/pages/knowledge/WebPages.jsx
+2:29:41 PM [vite] (client) hmr update /src/pages/knowledge/Notes.jsx
+2:31:49 PM [vite] (client) hmr update /src/pages/knowledge/Documents.jsx
+2:34:40 PM [vite] (client) hmr update /src/pages/knowledge/Documents.jsx
+2:41:13 PM [vite] (client) hmr update /src/pages/knowledge/Audios.jsx
+2:41:19 PM [vite] (client) hmr update /src/pages/knowledge/Videos.jsx
+2:41:25 PM [vite] (client) hmr update /src/pages/knowledge/WebPages.jsx
+2:41:27 PM [vite] (client) hmr update /src/pages/knowledge/Notes.jsx
+2:43:07 PM [vite] (client) hmr update /src/pages/knowledge/DocumentDetail.jsx
+2:45:47 PM [vite] (client) hmr update /src/pages/knowledge/Audios.jsx
+2:45:52 PM [vite] (client) hmr update /src/pages/knowledge/Videos.jsx
+2:45:58 PM [vite] (client) hmr update /src/pages/knowledge/WebPages.jsx
+2:46:00 PM [vite] (client) hmr update /src/pages/knowledge/Notes.jsx
+2:47:23 PM [vite] (client) hmr update /src/pages/knowledge/Documents.jsx
+2:47:29 PM [vite] (client) hmr update /src/pages/knowledge/Videos.jsx
+2:47:36 PM [vite] (client) hmr update /src/pages/knowledge/Audios.jsx
+2:47:43 PM [vite] (client) hmr update /src/pages/knowledge/WebPages.jsx
+2:47:45 PM [vite] (client) hmr update /src/pages/knowledge/Notes.jsx
+2:49:01 PM [vite] (client) hmr update /src/pages/knowledge/Documents.jsx
+2:49:03 PM [vite] (client) hmr update /src/pages/knowledge/WebPages.jsx
+2:51:39 PM [vite] (client) hmr update /src/pages/knowledge/Documents.jsx
+2:51:44 PM [vite] (client) hmr update /src/pages/knowledge/Videos.jsx
+2:51:52 PM [vite] (client) hmr update /src/pages/knowledge/Audios.jsx
+2:51:59 PM [vite] (client) hmr update /src/pages/knowledge/WebPages.jsx
+2:52:01 PM [vite] (client) hmr update /src/pages/knowledge/Notes.jsx
+2:53:06 PM [vite] (client) hmr update /src/components/Sidebar.jsx
+2:53:07 PM [vite] (client) hmr update /src/App.jsx
