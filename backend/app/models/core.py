@@ -30,12 +30,29 @@ class Source(Base):
     documents = relationship("Document", back_populates="source")
 
 
+class DocumentFolder(Base):
+    """文档文件夹（支持层级分组）。"""
+    __tablename__ = "document_folders"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), index=True)
+    name = Column(String(100), nullable=False)
+    parent_id = Column(Integer, ForeignKey("document_folders.id"), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User")
+    parent = relationship("DocumentFolder", remote_side="DocumentFolder.id", foreign_keys=[parent_id], back_populates="children")
+    children = relationship("DocumentFolder", back_populates="parent", foreign_keys=[parent_id])
+    documents = relationship("Document", back_populates="folder", foreign_keys="Document.folder_id")
+
+
 class Document(Base):
     __tablename__ = "documents"
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), index=True)
     source_id = Column(Integer, ForeignKey("sources.id"), nullable=True)
+    folder_id = Column(Integer, ForeignKey("document_folders.id"), nullable=True, index=True)
 
     title = Column(String(255), nullable=False)
     doc_type = Column(String(50), nullable=False)  # doc/xls/ppt/pdf/txt/image/other/video/audio/web/note/message/product
@@ -49,6 +66,7 @@ class Document(Base):
 
     user = relationship("User", back_populates="documents")
     source = relationship("Source", back_populates="documents")
+    folder = relationship("DocumentFolder", back_populates="documents", foreign_keys=[folder_id])
     contents = relationship("DocumentContent", back_populates="document")
     chunks = relationship("Chunk", back_populates="document")
 

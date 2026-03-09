@@ -7,10 +7,10 @@
 /* ---------- Design Tokens ---------- */
 :root {
   /* Primary */
-  --color-primary: #4285F4;
-  --color-primary-hover: #5a95f5;
-  --color-primary-light: #e8f0fe;
-  --color-primary-dark: #1a73e8;
+  --color-primary: #202833;
+  --color-primary-hover: #2a3342;
+  --color-primary-light: #e8eaed;
+  --color-primary-dark: #151b24;
 
   /* Google Accent */
   --color-green: #34A853;
@@ -111,8 +111,15 @@ a {
 /* ---------- App Layout ---------- */
 .app-layout {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   background: var(--color-bg);
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
 .app-main {
@@ -128,6 +135,109 @@ a {
   overflow-y: auto;
   padding: 28px 32px;
   background: var(--color-bg);
+}
+
+/* ---------- Global Header ---------- */
+.global-header {
+  height: 60px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+  z-index: 200;
+  box-shadow: var(--shadow-sm);
+}
+
+.gh-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gh-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gh-app-name {
+  font-family: 'Impact', 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  /* Extra bold for "艺术加粗字体" */
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.gh-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.gh-profile-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.gh-profile-btn:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.gh-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 140px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: 8px 0;
+  z-index: 1000;
+  animation: slideUp 0.15s ease-out;
+}
+
+.gh-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.gh-dropdown-item:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---------- Two-Panel Sidebar ---------- */
@@ -163,16 +273,16 @@ a {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--color-primary) 0%, #7baaf7 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.sidebar-l1 .sidebar-logo .logo-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
+.sidebar-l1 .sidebar-logo .logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .sidebar-l1 .sidebar-logo .logo-text {
@@ -234,7 +344,7 @@ a {
 
 /* L2 Expanded Panel */
 .sidebar-l2 {
-  width: 160px;
+  width: 180px;
   background: var(--color-surface);
   border-right: 1px solid var(--color-border-light);
   display: flex;

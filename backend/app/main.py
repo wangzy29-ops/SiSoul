@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .config import get_settings
 from .database import Base, engine
-from .routers import ingest, docs, chat, subscriptions, watch_folders, ai, openclaw, profile, assistant, recycle, consistency, messages, products, tools
+from .routers import ingest, docs, chat, subscriptions, watch_folders, ai, openclaw, profile, assistant, recycle, consistency, messages, products, tools, folders, engineer
 
 settings = get_settings()
 
@@ -36,6 +36,8 @@ app.include_router(consistency.router)
 app.include_router(messages.router)
 app.include_router(products.router)
 app.include_router(tools.router)
+app.include_router(folders.router)
+app.include_router(engineer.router)
 
 
 @app.get("/health")
@@ -47,12 +49,24 @@ async def health_check():
 async def on_startup():
     # 确保默认用户存在
     from .database import SessionLocal
-    from .models import User
+    from .models import User, DocumentFolder
     db = SessionLocal()
     user = db.query(User).filter(User.id == 1).first()
     if not user:
         db.add(User(id=1, name="default"))
         db.commit()
+
+    # 预创建默认文件夹
+    DEFAULT_FOLDERS = ["我的衣柜", "我的健康档案", "我的账单", "我的饭桌"]
+    for fname in DEFAULT_FOLDERS:
+        exists = db.query(DocumentFolder).filter(
+            DocumentFolder.user_id == 1,
+            DocumentFolder.name == fname,
+            DocumentFolder.parent_id == None,
+        ).first()
+        if not exists:
+            db.add(DocumentFolder(user_id=1, name=fname, parent_id=None))
+    db.commit()
     db.close()
 
     # 启动后台服务

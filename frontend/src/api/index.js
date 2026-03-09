@@ -137,3 +137,18 @@ export const productsApi = {
 export const healthApi = {
   check: () => request('/health'),
 };
+
+// ---- Document Folders ----
+export const foldersApi = {
+  list: () => request('/api/folders/'),
+  create: (data) => request('/api/folders/', { method: 'POST', body: JSON.stringify(data) }),
+  delete: (id) => request(`/api/folders/${id}`, { method: 'DELETE' }),
+  moveDocs: (doc_ids, folder_id) => request('/api/folders/move_docs', { method: 'POST', body: JSON.stringify({ doc_ids, folder_id }) }),
+};
+
+// ---- Engineer (工程师) ----
+export const engineerApi = {
+  doc2audio: (formData) => request('/api/engineer/doc2audio', { method: 'POST', body: formData }),
+  voices: () => request('/api/engineer/doc2audio/voices'),
+  downloadUrl: (path) => `${API_BASE}${path}`,
+};

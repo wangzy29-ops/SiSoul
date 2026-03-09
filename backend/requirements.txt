@@ -11,3 +11,4 @@ openpyxl
 python-pptx
 beautifulsoup4
 dashscope
+edge-tts

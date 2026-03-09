@@ -28,6 +28,7 @@ const breadcrumbMap = {
     '/assistant/agent/butler': ['AI助理', '大管家'],
     '/assistant/agent/expert': ['AI助理', '百事通'],
     '/assistant/agent/stylist': ['AI助理', '形象顾问'],
+    '/assistant/agent/engineer': ['AI助理', '工程师'],
     '/forget/recycle': ['遗忘', '回收站'],
     '/forget/consistency': ['遗忘', '一致性'],
 };
