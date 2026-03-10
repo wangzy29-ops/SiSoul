@@ -102,7 +102,7 @@ export default function MyTask() {
             {/* Calendar grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 1 }}>
                 {cells.map((day, i) => {
-                    if (!day) return <div key={`empty-${i}`} style={{ minHeight: 90, background: 'var(--color-bg-secondary)', borderRadius: 4, opacity: 0.3 }} />;
+                    if (!day) return <div key={`empty-${i}`} style={{ minHeight: 90, background: 'var(--color-bg-secondary)', borderRadius: 2, opacity: 0.3 }} />;
                     const dateKey = formatDate(year, month, day);
                     const isToday = dateKey === todayStr;
                     const isSelected = dateKey === selectedDate;
@@ -116,7 +116,7 @@ export default function MyTask() {
                                 minHeight: 90,
                                 padding: 6,
                                 background: isSelected ? 'rgba(66,133,244,0.08)' : 'var(--color-bg-secondary)',
-                                borderRadius: 6,
+                                borderRadius: 2,
                                 cursor: 'pointer',
                                 border: isSelected ? '2px solid var(--color-primary)' : isToday ? '2px solid #f59e0b' : '2px solid transparent',
                                 transition: 'all 0.15s',
@@ -135,7 +135,7 @@ export default function MyTask() {
                                     fontSize: 10,
                                     padding: '1px 4px',
                                     marginBottom: 2,
-                                    borderRadius: 3,
+                                    borderRadius: 2,
                                     background: t.type === 'schedule' ? 'rgba(59,130,246,0.15)' : 'rgba(16,185,129,0.15)',
                                     color: t.type === 'schedule' ? '#3b82f6' : '#10b981',
                                     whiteSpace: 'nowrap',
@@ -158,7 +158,7 @@ export default function MyTask() {
                 <div className="card" style={{ marginTop: 16, padding: '16px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
                         <h3 style={{ fontSize: 'var(--font-size-md)', fontWeight: 600 }}>📋 {selectedDate}</h3>
-                        <button className="btn btn-primary" style={{ borderRadius: 6, fontSize: 'var(--font-size-sm)' }} onClick={() => { setNewTitle(''); setAddOpen(true); }}>
+                        <button className="btn btn-primary" style={{ borderRadius: 2, fontSize: 'var(--font-size-sm)' }} onClick={() => { setNewTitle(''); setAddOpen(true); }}>
                             + 添加
                         </button>
                     </div>
@@ -167,7 +167,7 @@ export default function MyTask() {
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                             {(tasks[selectedDate] || []).map(t => (
-                                <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', background: 'var(--color-bg-secondary)', borderRadius: 6 }}>
+                                <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', background: 'var(--color-bg-secondary)', borderRadius: 2 }}>
                                     <input type="checkbox" checked={t.done} onChange={() => toggleDone(selectedDate, t.id)} style={{ cursor: 'pointer' }} />
                                     <span style={{
                                         flex: 1,
@@ -178,7 +178,7 @@ export default function MyTask() {
                                         <span style={{
                                             display: 'inline-block',
                                             padding: '1px 6px',
-                                            borderRadius: 4,
+                                            borderRadius: 2,
                                             fontSize: 'var(--font-size-xs)',
                                             marginRight: 8,
                                             background: t.type === 'schedule' ? 'rgba(59,130,246,0.15)' : 'rgba(16,185,129,0.15)',

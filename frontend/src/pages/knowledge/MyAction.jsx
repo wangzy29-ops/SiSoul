@@ -24,7 +24,7 @@ export default function MyAction() {
                         <div key={s.name} style={{
                             padding: '16px',
                             background: 'var(--color-bg-secondary)',
-                            borderRadius: 8,
+                            borderRadius: 2,
                             borderLeft: `4px solid ${s.color}`,
                         }}>
                             <div style={{ fontSize: 'var(--font-size-md)', marginBottom: 4 }}>{s.icon} {s.name}</div>

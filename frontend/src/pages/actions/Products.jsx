@@ -108,7 +108,7 @@ export default function Products() {
                         <input type="text" placeholder="搜索商品..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                     </div>
 
-                    <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 6, height: 34, padding: '0 16px', borderRadius: 8 }} onClick={() => setShowAddModal(true)}>
+                    <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 6, height: 34, padding: '0 16px', borderRadius: 2 }} onClick={() => setShowAddModal(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
                         录入商品链接
                     </button>
@@ -158,7 +158,7 @@ export default function Products() {
                                     value={addUrl}
                                     onChange={e => setAddUrl(e.target.value)}
                                     disabled={adding}
-                                    style={{ width: '100%', padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 6, fontSize: 14 }}
+                                    style={{ width: '100%', padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 2, fontSize: 14 }}
                                 />
                             </div>
                             <div className="form-group">
@@ -170,7 +170,7 @@ export default function Products() {
                                     value={addTitle}
                                     onChange={e => setAddTitle(e.target.value)}
                                     disabled={adding}
-                                    style={{ width: '100%', padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 6, fontSize: 14 }}
+                                    style={{ width: '100%', padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 2, fontSize: 14 }}
                                 />
                             </div>
                         </div>
@@ -223,7 +223,7 @@ export default function Products() {
                                     position: 'absolute', top: 8, right: 8,
                                     background: ps.bg, color: ps.text,
                                     fontSize: 'var(--font-size-xs)', fontWeight: 600,
-                                    padding: '2px 8px', borderRadius: 10,
+                                    padding: '2px 8px', borderRadius: 2,
                                     backdropFilter: 'blur(4px)',
                                 }}>
                                     {ps.label}
@@ -298,7 +298,7 @@ export default function Products() {
                                             <span style={{
                                                 background: ps.bg, color: ps.text,
                                                 fontSize: 'var(--font-size-xs)', fontWeight: 500,
-                                                padding: '2px 8px', borderRadius: 10,
+                                                padding: '2px 8px', borderRadius: 2,
                                             }}>
                                                 {ps.label}
                                             </span>

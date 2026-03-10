@@ -106,7 +106,7 @@ export default function ProductDetail() {
                     </button>
                     {product.main_image_url || product.main_image_path ? (
                         <div style={{
-                            width: 120, height: 120, borderRadius: 8, overflow: 'hidden',
+                            width: 120, height: 120, borderRadius: 2, overflow: 'hidden',
                             boxShadow: '0 2px 8px rgba(0,0,0,0.1)', flexShrink: 0
                         }}>
                             <img
@@ -117,7 +117,7 @@ export default function ProductDetail() {
                             />
                         </div>
                     ) : (
-                        <div style={{ width: 120, height: 120, borderRadius: 8, background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 32 }}>🛍️</div>
+                        <div style={{ width: 120, height: 120, borderRadius: 2, background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 32 }}>🛍️</div>
                     )}
                 </div>
 
@@ -135,7 +135,7 @@ export default function ProductDetail() {
 
                     <div className="doc-detail-meta" style={{ flexWrap: 'wrap', gap: 8 }}>
                         {product.platform && <span className="tag tag-blue">{getPlatformLabel(product.platform)}</span>}
-                        {product.price && <span style={{ color: '#EA4335', fontWeight: 600, padding: '2px 8px', background: 'rgba(234, 67, 53, 0.1)', borderRadius: 4 }}>¥ {product.price}</span>}
+                        {product.price && <span style={{ color: '#EA4335', fontWeight: 600, padding: '2px 8px', background: 'rgba(234, 67, 53, 0.1)', borderRadius: 2 }}>¥ {product.price}</span>}
                         <span style={{ color: 'var(--color-text-muted)', fontSize: 12, display: 'flex', alignItems: 'center' }}>
                             入库时间: {formatDate(product.created_at)}
                         </span>
@@ -164,7 +164,7 @@ export default function ProductDetail() {
             </div>
 
             {/* Tab Content */}
-            <div className="doc-content-area" style={{ flex: 1, padding: 24, overflowY: 'auto', background: 'var(--color-surface)', borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}>
+            <div className="doc-content-area" style={{ flex: 1, padding: 24, overflowY: 'auto', background: 'var(--color-surface)', borderBottomLeftRadius: 2, borderBottomRightRadius: 2 }}>
 
                 {/* 1. 商品全文 */}
                 {activeTab === 'raw' && (
@@ -205,7 +205,7 @@ export default function ProductDetail() {
                             基于联网搜索能力，综合该商品的基本信息、竞品情况、商品评价等生成深度报告
                         </div>
                         {product.ai_intro ? (
-                            <div className="ai-result-card markdown-body" style={{ padding: 20, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8 }}>
+                            <div className="ai-result-card markdown-body" style={{ padding: 20, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 2 }}>
                                 <ReactMarkdown>{product.ai_intro}</ReactMarkdown>
                             </div>
                         ) : (

@@ -261,11 +261,11 @@ export default function Documents() {
             {/* ===== Toolbar ===== */}
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 6 }} onClick={() => setUploadOpen(true)}>
+                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 2 }} onClick={() => setUploadOpen(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
                         手工上传
                     </button>
-                    <button className="btn btn-outline km-upload-btn" style={{ borderRadius: 6 }} onClick={() => setNewFolderOpen(true)}>
+                    <button className="btn btn-outline km-upload-btn" style={{ borderRadius: 2 }} onClick={() => setNewFolderOpen(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                             <line x1="12" y1="11" x2="12" y2="17" /><line x1="9" y1="14" x2="15" y2="14" />
@@ -340,7 +340,7 @@ export default function Documents() {
                                     style={{
                                         display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
                                         background: 'var(--color-bg-primary, #fff)', border: '1px solid var(--color-border-light, #e5e7eb)',
-                                        borderRadius: 10, cursor: 'pointer', userSelect: 'none', position: 'relative',
+                                        borderRadius: 2, cursor: 'pointer', userSelect: 'none', position: 'relative',
                                         transition: 'box-shadow 0.15s',
                                     }}
                                     onClick={() => setCurrentFolderId(f.id)}
@@ -500,7 +500,7 @@ export default function Documents() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 280, overflowY: 'auto' }}>
                         {/* Root */}
                         <div
-                            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, cursor: 'pointer', background: moveTargetId === null ? 'var(--color-primary-light, #ede9fe)' : 'var(--color-bg-secondary, #f5f5f5)', border: moveTargetId === null ? '1.5px solid var(--color-primary)' : '1.5px solid transparent' }}
+                            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 2, cursor: 'pointer', background: moveTargetId === null ? 'var(--color-primary-light, #ede9fe)' : 'var(--color-bg-secondary, #f5f5f5)', border: moveTargetId === null ? '1.5px solid var(--color-primary)' : '1.5px solid transparent' }}
                             onClick={() => setMoveTargetId(null)}
                         >
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#888" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
@@ -510,7 +510,7 @@ export default function Documents() {
                         {folders.filter(f => f.parent_id === null).map(f => (
                             <div
                                 key={f.id}
-                                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, cursor: 'pointer', background: moveTargetId === f.id ? 'var(--color-primary-light, #ede9fe)' : 'var(--color-bg-secondary, #f5f5f5)', border: moveTargetId === f.id ? '1.5px solid var(--color-primary)' : '1.5px solid transparent' }}
+                                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 2, cursor: 'pointer', background: moveTargetId === f.id ? 'var(--color-primary-light, #ede9fe)' : 'var(--color-bg-secondary, #f5f5f5)', border: moveTargetId === f.id ? '1.5px solid var(--color-primary)' : '1.5px solid transparent' }}
                                 onClick={() => setMoveTargetId(f.id)}
                             >
                                 <FolderIcon size={16} />

@@ -24,7 +24,7 @@ export default function MyAsset() {
             <div className="page-enter">
                 <div className="km-toolbar">
                     <div className="km-toolbar-left">
-                        <button className="btn btn-outline" style={{ borderRadius: 6, fontSize: 'var(--font-size-sm)' }} onClick={() => setActiveFolder(null)}>
+                        <button className="btn btn-outline" style={{ borderRadius: 2, fontSize: 'var(--font-size-sm)' }} onClick={() => setActiveFolder(null)}>
                             <svg viewBox="0 0 24 24" width="14" height="14" style={{ stroke: 'currentColor', strokeWidth: 2, fill: 'none', marginRight: 4 }}><polyline points="15 18 9 12 15 6" /></svg>
                             返回
                         </button>

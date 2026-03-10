@@ -183,7 +183,7 @@ export default function DocumentDetail() {
                 <div style={{
                     display: 'flex', alignItems: 'center', gap: 4,
                     padding: '3px 10px', background: 'var(--color-bg-secondary, #f5f5f5)',
-                    borderRadius: 6, fontSize: 12,
+                    borderRadius: 2, fontSize: 12,
                 }}>
                     <svg viewBox="0 0 24 24" width="12" height="12" style={{ opacity: 0.4, stroke: 'currentColor', fill: 'none', strokeWidth: 2 }}>
                         <path d="M12 2a4 4 0 0 1 4 4v2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h2V6a4 4 0 0 1 4-4z" />
@@ -201,7 +201,7 @@ export default function DocumentDetail() {
                     className="btn btn-outline"
                     onClick={() => handleRegenerate(type)}
                     disabled={isLoading}
-                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 6 }}
+                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 2 }}
                 >
                     {isLoading ? (
                         <><div className="spinner" style={{ width: 12, height: 12 }} /> 生成中...</>
@@ -364,7 +364,7 @@ export default function DocumentDetail() {
                                 <div style={{
                                     display: 'flex', alignItems: 'center', gap: 4,
                                     padding: '3px 10px', background: 'var(--color-bg-secondary, #f5f5f5)',
-                                    borderRadius: 6, fontSize: 12,
+                                    borderRadius: 2, fontSize: 12,
                                 }}>
                                     <svg viewBox="0 0 24 24" width="12" height="12" style={{ opacity: 0.4, stroke: 'currentColor', fill: 'none', strokeWidth: 2 }}>
                                         <path d="M12 2a4 4 0 0 1 4 4v2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h2V6a4 4 0 0 1 4-4z" />
@@ -381,7 +381,7 @@ export default function DocumentDetail() {
                                     className="btn btn-outline"
                                     onClick={handleGenerateTags}
                                     disabled={aiLoading.tags}
-                                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 6 }}
+                                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 2 }}
                                 >
                                     {aiLoading.tags ? (
                                         <><div className="spinner" style={{ width: 12, height: 12 }} /> 分析中...</>
@@ -417,7 +417,7 @@ export default function DocumentDetail() {
                                 {Object.entries(tagTree).map(([l1, l2Map]) => (
                                     <div key={l1} style={{
                                         border: '1px solid var(--color-border-light, #e5e7eb)',
-                                        borderRadius: 12, overflow: 'hidden',
+                                        borderRadius: 2, overflow: 'hidden',
                                         background: 'var(--color-bg-primary, #fff)',
                                     }}>
                                         <div
@@ -439,7 +439,7 @@ export default function DocumentDetail() {
                                             </svg>
                                             <span style={{ fontWeight: 600, fontSize: 15, color: l1Colors[l1] || '#6366f1' }}>{l1}</span>
                                             <span style={{
-                                                fontSize: 11, padding: '2px 8px', borderRadius: 10,
+                                                fontSize: 11, padding: '2px 8px', borderRadius: 2,
                                                 background: `${l1Colors[l1] || '#6366f1'}22`,
                                                 color: l1Colors[l1] || '#6366f1', fontWeight: 500,
                                             }}>
@@ -455,7 +455,7 @@ export default function DocumentDetail() {
                                                             {l3List.map((l3, i) => (
                                                                 <span key={i} style={{
                                                                     display: 'inline-flex', alignItems: 'center',
-                                                                    padding: '4px 12px', borderRadius: 20,
+                                                                    padding: '4px 12px', borderRadius: 2,
                                                                     fontSize: 12, fontWeight: 500,
                                                                     background: `${l1Colors[l1] || '#6366f1'}15`,
                                                                     color: l1Colors[l1] || '#6366f1',

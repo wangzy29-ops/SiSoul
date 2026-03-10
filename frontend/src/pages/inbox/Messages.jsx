@@ -112,7 +112,7 @@ export default function Messages() {
                                                 background: info.color + '20',
                                                 color: info.color,
                                                 padding: '2px 7px',
-                                                borderRadius: 10,
+                                                borderRadius: 2,
                                                 fontWeight: 500,
                                             }}>
                                                 {SUB_TYPE_TABS.find(t => t.key === msg.sub_type)?.label || msg.sub_type}

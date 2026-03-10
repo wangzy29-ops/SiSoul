@@ -290,7 +290,7 @@ export default function MindmapCanvas({ markdown }) {
                 width: '100%',
                 height: 'calc(100vh - 280px)',
                 minHeight: '500px',
-                borderRadius: 12,
+                borderRadius: 2,
                 overflow: 'hidden',
                 border: '1px solid var(--color-border-light, #e5e7eb)'
             }}
@@ -318,7 +318,7 @@ export default function MindmapCanvas({ markdown }) {
 }
 
 const ctrlBtnStyle = {
-    width: 32, height: 32, borderRadius: 8,
+    width: 32, height: 32, borderRadius: 2,
     border: '1px solid #ddd', background: 'rgba(255,255,255,0.9)',
     cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center',
     boxShadow: '0 1px 4px rgba(0,0,0,0.08)',

@@ -22,7 +22,7 @@ export default function SimpleEditor({ value, onChange, placeholder, style }) {
     };
 
     return (
-        <div style={{ border: '1px solid var(--border-color)', borderRadius: 6, display: 'flex', flexDirection: 'column', ...style }}>
+        <div style={{ border: '1px solid var(--border-color)', borderRadius: 2, display: 'flex', flexDirection: 'column', ...style }}>
             <div style={{ padding: '8px 12px', borderBottom: '1px solid var(--border-color)', display: 'flex', gap: 6, flexWrap: 'wrap', backgroundColor: '#f8f9fa' }}>
                 <button type="button" onClick={() => exec('bold')} style={btnStyle}><b>B</b></button>
                 <button type="button" onClick={() => exec('italic')} style={btnStyle}><i>I</i></button>
@@ -58,7 +58,7 @@ const btnStyle = {
     padding: '4px 8px',
     border: '1px solid #ccc',
     backgroundColor: '#fff',
-    borderRadius: 4,
+    borderRadius: 2,
     cursor: 'pointer',
     fontSize: 12,
     color: '#333'
