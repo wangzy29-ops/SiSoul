@@ -1,6 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Layout from './components/Layout';
+
+// 重定向组件，用于处理带参数的路由重定向
+function DocumentDetailRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/inbox/documents/${id}`} replace />;
+}
 
 // Lazy load all page components for better initial load performance
 const Home = lazy(() => import('./pages/Home'));
@@ -82,7 +88,7 @@ export default function App() {
 
             {/* Legacy redirects */}
             <Route path="/knowledge/documents" element={<Navigate to="/inbox/documents" replace />} />
-            <Route path="/knowledge/documents/:id" element={<Navigate to="/inbox/documents/:id" replace />} />
+            <Route path="/knowledge/documents/:id" element={<DocumentDetailRedirect />} />
             <Route path="/knowledge/videos" element={<Navigate to="/inbox/videos" replace />} />
             <Route path="/knowledge/audios" element={<Navigate to="/inbox/audios" replace />} />
             <Route path="/knowledge/webpages" element={<Navigate to="/inbox/webpages" replace />} />

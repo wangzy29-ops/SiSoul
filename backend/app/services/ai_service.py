@@ -36,7 +36,7 @@ def _call_llm(prompt: str, model: Optional[str] = None) -> Optional[str]:
     }
 
     try:
-        with httpx.Client(timeout=60) as client:
+        with httpx.Client(timeout=120) as client:
             resp = client.post(
                 f"{base_url}/chat/completions",
                 headers=headers,
@@ -57,11 +57,14 @@ def _call_llm(prompt: str, model: Optional[str] = None) -> Optional[str]:
     return None
 
 
-def _truncate_for_prompt(text: str, max_chars: int = 6000) -> str:
-    """截断文本以适配 LLM 上下文长度。"""
-    if len(text) <= max_chars:
+def _truncate_for_prompt(text: str, max_bytes: int = 200000) -> str:
+    """截断文本以适配 LLM 上下文长度（约200KB）。"""
+    encoded = text.encode("utf-8")
+    if len(encoded) <= max_bytes:
         return text
-    return text[:max_chars] + "\n...(内容过长已截断)"
+    # 截断到最大字节数，并确保不截断在多字节字符中间
+    truncated = encoded[:max_bytes].decode("utf-8", errors="ignore")
+    return truncated + "\n...(内容过长已截断)"
 
 
 # ---------------------------------------------------------------------------

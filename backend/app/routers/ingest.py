@@ -1,9 +1,10 @@
 import os
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import List
 
-from fastapi import APIRouter, Depends, File, UploadFile
+from fastapi import APIRouter, Depends, File, UploadFile, Form
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
@@ -13,13 +14,16 @@ from ..schemas import DocumentOut, NoteCreate, UrlCreate
 from ..services import parsing_service, ai_service
 from ..services.ai_worker import enqueue as enqueue_ai
 
+logger = logging.getLogger(__name__)
+
 router = APIRouter(prefix="/api/ingest", tags=["ingest"])
 
-BASE_DATA_DIR = Path(os.getenv("MEMORYHUB_DATA_DIR", "./data"))
+BASE_DATA_DIR = Path(os.getenv("MEMORYHUB_DATA_DIR", "/Users/wangziyu/MemoryHub/data"))
 
 
 @router.post("/upload_file", response_model=DocumentOut)
 async def upload_file(
+    folder_id: int = Form(None),
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
 ):
@@ -58,6 +62,7 @@ async def upload_file(
         doc_type=doc_type,
         status="pending",
         original_path=str(save_path),
+        folder_id=folder_id,
     )
     db.add(doc)
     db.commit()
@@ -97,6 +102,15 @@ async def upload_file(
     # 推入 AI 后台队列（非音频，因为音频是异步转录完后再推入）
     if doc_type != "audio":
         enqueue_ai(doc.id)
+    
+    # 自动分类到知识目录（如果没有指定 folder_id）
+    if not folder_id:
+        try:
+            from ..services.knowledge_service import auto_classify_and_move
+            if auto_classify_and_move(db, doc):
+                logger.info("文件已自动分类到知识目录: doc_id=%d", doc.id)
+        except Exception as e:
+            logger.warning("自动分类失败: doc_id=%d, error=%s", doc.id, e)
 
     return doc
 

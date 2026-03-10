@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 settings = get_settings()
 
 # 存储下载的媒体文件的目录
-MEDIA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "media")
+MEDIA_DIR = "/Users/wangziyu/MemoryHub/media"
 os.makedirs(MEDIA_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -490,6 +490,14 @@ async def _process_file_message(
             parsing_service.chunk_and_index_text(db, doc, full_content)
 
         logger.info("已保存文件: doc_id=%d, type=%s, path=%s", doc.id, doc_type, local_path)
+        
+        # 自动分类到知识目录
+        try:
+            from .knowledge_service import auto_classify_and_move
+            if auto_classify_and_move(db, doc):
+                logger.info("文件已自动分类到知识目录: doc_id=%d", doc.id)
+        except Exception as e:
+            logger.warning("自动分类失败: doc_id=%d, error=%s", doc.id, e)
     else:
         logger.warning("文件下载失败: %s", file_name or description)
 
@@ -889,17 +897,17 @@ async def _get_dingtalk_access_token() -> Optional[str]:
 
     try:
         async with httpx.AsyncClient(timeout=30) as client:
-            resp = await client.get(
-                "https://oapi.dingtalk.com/gettoken",
-                params={"appkey": app_key, "appsecret": app_secret},
+            resp = await client.post(
+                "https://api.dingtalk.com/v1.0/oauth2/accessToken",
+                json={"appKey": app_key, "appSecret": app_secret},
             )
             data = resp.json()
-            if data.get("errcode") == 0:
-                _dingtalk_access_token = data.get("access_token")
-                _dingtalk_token_expires = time.time() + data.get("expires_in", 7200) - 300
+            if data.get("accessToken"):
+                _dingtalk_access_token = data.get("accessToken")
+                _dingtalk_token_expires = time.time() + data.get("expireIn", 7200) - 300
                 return _dingtalk_access_token
             else:
-                logger.warning("获取钉钉 access_token 失败: %s", data.get("errmsg"))
+                logger.warning("获取钉钉 access_token 失败: %s", data)
                 return None
     except Exception as e:
         logger.warning("获取钉钉 access_token 异常: %s", e)
@@ -915,13 +923,13 @@ async def _download_dingtalk_media(download_code: str, file_name: Optional[str] 
     try:
         async with httpx.AsyncClient(timeout=120) as client:
             resp = await client.post(
-                "https://oapi.dingtalk.com/robot/message/getfile",
-                params={"access_token": access_token},
+                "https://api.dingtalk.com/v1.0/robot/messageFiles/download",
+                headers={"x-acs-dingtalk-access-token": access_token},
                 json={"downloadCode": download_code},
             )
             data = resp.json()
-            if data.get("errcode") != 0:
-                logger.warning("获取钉钉文件下载URL失败: %s", data.get("errmsg"))
+            if data.get("code"):
+                logger.warning("获取钉钉文件下载URL失败: %s", data.get("message"))
                 return None
 
             download_url = data.get("downloadUrl")

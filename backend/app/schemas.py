@@ -14,6 +14,7 @@ class DocumentOut(BaseModel):
     doc_type: str
     status: str
     file_size: Optional[int] = None  # 新增字段
+    folder_id: Optional[int] = None  # 文件夹ID
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 

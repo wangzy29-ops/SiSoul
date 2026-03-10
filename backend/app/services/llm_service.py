@@ -15,9 +15,20 @@ logger = logging.getLogger(__name__)
 DEFAULT_MODEL = "qwen3.5-plus"
 
 
+def _truncate_text(text: str, max_bytes: int = 200000) -> str:
+    """截断文本以适应模型输入限制（约200KB）。"""
+    encoded = text.encode("utf-8")
+    if len(encoded) <= max_bytes:
+        return text
+    truncated = encoded[:max_bytes].decode("utf-8", errors="ignore")
+    return truncated + "\n...(内容过长已截断)"
+
+
 def _build_messages(query: str, contexts: List[str]) -> List[dict]:
     """构建符合 OpenAI 消息格式的消息列表。"""
-    context_text = "\n\n".join([f"[片段{i+1}]\n{c}" for i, c in enumerate(contexts)])
+    # 截断过长的上下文
+    truncated_contexts = [_truncate_text(c) for c in contexts]
+    context_text = "\n\n".join([f"[片段{i+1}]\n{c}" for i, c in enumerate(truncated_contexts)])
     system_content = (
         "你是一个个人多模态记忆库助手，基于提供的知识片段回答用户问题。"
         "尽量使用中文回答，并在无法从片段中得到答案时明确说明。"

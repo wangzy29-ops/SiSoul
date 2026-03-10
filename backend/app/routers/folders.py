@@ -96,3 +96,31 @@ async def move_docs(payload: MoveDocRequest, db: Session = Depends(get_db)):
     )
     db.commit()
     return {"detail": f"已移动 {len(payload.doc_ids)} 个文件"}
+
+
+@router.post("/init_knowledge")
+async def init_knowledge_folders(db: Session = Depends(get_db)):
+    """初始化知识目录文件夹结构。"""
+    from ..services.knowledge_service import init_knowledge_folders as _init
+    folders = _init(db, user_id=1)
+    return {"detail": f"已初始化 {len(folders)} 个知识目录文件夹"}
+
+
+@router.post("/classify/{doc_id}")
+async def classify_document(doc_id: int, db: Session = Depends(get_db)):
+    """手动触发文档分类。"""
+    doc = db.query(Document).filter(Document.id == doc_id).first()
+    if not doc:
+        raise HTTPException(status_code=404, detail="文档不存在")
+    
+    from ..services.knowledge_service import classify_document as _classify
+    folder, reason = _classify(db, doc)
+    
+    if folder:
+        return {
+            "folder_id": folder.id,
+            "folder_name": folder.name,
+            "reason": reason
+        }
+    else:
+        return {"detail": "分类失败", "reason": reason}

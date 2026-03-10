@@ -170,12 +170,16 @@ export default function Documents() {
         if (!files?.length) return;
         const fd = new FormData();
         fd.append('file', files[0]);
+        // 如果在文件夹内，传递 folder_id
+        console.log('Upload - currentFolderId:', currentFolderId, 'type:', typeof currentFolderId);
+        if (currentFolderId) {
+            fd.append('folder_id', currentFolderId);
+            console.log('Upload - folder_id appended to FormData');
+        } else {
+            console.log('Upload - No folder_id (root directory)');
+        }
         try {
             const newDoc = await docsApi.upload(fd);
-            // 上传后如果在某个文件夹内，把新文档移入
-            if (currentFolderId && newDoc?.id) {
-                await foldersApi.moveDocs([newDoc.id], currentFolderId);
-            }
             setUploadOpen(false);
             loadData();
         } catch (e) { alert('上传失败: ' + e.message); }
@@ -386,7 +390,7 @@ export default function Documents() {
                                     {displayDocs.map(doc => {
                                         const info = getTypeInfo(doc.doc_type);
                                         return (
-                                            <tr key={doc.id} className={`km-row ${selected.has(doc.id) ? 'selected' : ''}`} onContextMenu={(e) => handleContextMenu(e, doc)} onClick={() => navigate(`/knowledge/documents/${doc.id}`)}>
+                                            <tr key={doc.id} className={`km-row ${selected.has(doc.id) ? 'selected' : ''}`} onContextMenu={(e) => handleContextMenu(e, doc)} onClick={() => navigate(`/inbox/documents/${doc.id}`)}>
                                                 <td className="km-td-check" onClick={e => e.stopPropagation()}>
                                                     <input type="checkbox" checked={selected.has(doc.id)} onChange={() => toggleSelect(doc.id)} />
                                                 </td>
@@ -421,7 +425,7 @@ export default function Documents() {
                             {displayDocs.map(doc => {
                                 const info = getTypeInfo(doc.doc_type);
                                 return (
-                                    <div key={doc.id} className="card file-card" onClick={() => navigate(`/knowledge/documents/${doc.id}`)} onContextMenu={(e) => handleContextMenu(e, doc)}>
+                                    <div key={doc.id} className="card file-card" onClick={() => navigate(`/inbox/documents/${doc.id}`)} onContextMenu={(e) => handleContextMenu(e, doc)}>
                                         <div className="file-icon" style={{ background: 'transparent' }}>
                                             <img src={info.src} alt={info.label} style={{ width: 48, height: 48 }} />
                                         </div>
@@ -438,7 +442,7 @@ export default function Documents() {
             {/* ===== Context Menu ===== */}
             {contextMenu && (
                 <div className="km-context-menu" style={{ top: contextMenu.y, left: contextMenu.x }} onClick={e => e.stopPropagation()}>
-                    <div className="km-ctx-item" onClick={() => { navigate(`/knowledge/documents/${contextMenu.doc.id}`); setContextMenu(null); }}>
+                    <div className="km-ctx-item" onClick={() => { navigate(`/inbox/documents/${contextMenu.doc.id}`); setContextMenu(null); }}>
                         <svg viewBox="0 0 24 24" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
                         预览
                     </div>

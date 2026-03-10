@@ -24,15 +24,28 @@ def _fake_embedding(text: str, dim: int = 128) -> List[float]:
     return [n / s for n in nums]
 
 
+def _truncate_text(text: str, max_bytes: int = 200000) -> str:
+    """截断文本以适应模型输入限制（约200KB）。"""
+    encoded = text.encode("utf-8")
+    if len(encoded) <= max_bytes:
+        return text
+    # 截断到最大字节数，并确保不截断在多字节字符中间
+    truncated = encoded[:max_bytes].decode("utf-8", errors="ignore")
+    return truncated + "\n...(内容过长已截断)"
+
+
 def _embed_with_dashscope(texts: List[str]) -> List[List[float]]:
     if not (_HAS_DASHSCOPE and settings.maas_api_key and settings.maas_provider == "dashscope"):
         return [_fake_embedding(t) for t in texts]
+
+    # 截断过长的文本
+    truncated_texts = [_truncate_text(t) for t in texts]
 
     dashscope.api_key = settings.maas_api_key  # type: ignore
     try:
         resp = TextEmbedding.call(  # type: ignore
             model=settings.maas_embedding_model or "text-embedding-v1",
-            input=texts,
+            input=truncated_texts,
         )
     except Exception:
         return [_fake_embedding(t) for t in texts]
