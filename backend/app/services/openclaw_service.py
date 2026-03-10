@@ -91,13 +91,36 @@ def _extract_actual_platform(scraped_text: str, html: str) -> str:
     combined_lower = combined_text.lower()
     
     # 按优先级匹配平台
-    for platform, keywords in ACTUAL_PLATFORM_KEYWORDS.items():
-        for keyword in keywords:
-            if keyword.lower() in combined_lower:
-                return platform
-    
     return "unknown"
 
+
+def _generate_title_from_content(content: Optional[str], max_len: int = 50) -> Optional[str]:
+    """从内容生成标题，取第一行或前几个字。"""
+    if not content:
+        return None
+    content = content.strip()
+    if not content:
+        return None
+    first_line = content.split('\n')[0].strip()
+    if len(first_line) > max_len:
+        return first_line[:max_len] + "..."
+    return first_line
+
+
+def _parse_timestamp(ts: Optional[int]) -> datetime:
+    """将毫秒时间戳转换为 datetime。"""
+    if not ts:
+        return datetime.now()
+    try:
+        return datetime.fromtimestamp(ts / 1000.0)
+    except Exception:
+        return datetime.now()
+
+
+def _format_timestamp(ts: Optional[int]) -> str:
+    """格式化时间戳为字符串。"""
+    dt = _parse_timestamp(ts)
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 # ---------------------------------------------------------------------------
 # 主入口

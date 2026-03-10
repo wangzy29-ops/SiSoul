@@ -108,7 +108,7 @@ function NotesPanel() {
         <>
             <div className="km-toolbar" style={{ marginBottom: 12 }}>
                 <div className="km-toolbar-left">
-                    <button className="btn btn-primary km-upload-btn" style={{ marginLeft: -4, borderRadius: 6 }} onClick={() => setCreateOpen(true)}>
+                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 6 }} onClick={() => setCreateOpen(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16" style={{ stroke: 'currentColor', strokeWidth: 1.8, fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
                         新建笔记
                     </button>

@@ -1,0 +1,414 @@
+/Users/wangziyu/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:     Started server process [56325]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8899 (Press CTRL+C to quit)
+INFO:     127.0.0.1:53148 - "POST /api/openclaw/message HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53202 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53206 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53211 - "OPTIONS /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53212 - "OPTIONS /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53214 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53211 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53215 - "GET /assets/RecycleBin-Cv-bRAij.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53211 - "OPTIONS /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53211 - "GET /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53484 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53484 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53484 - "OPTIONS /api/docs/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "OPTIONS /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53486 - "OPTIONS /api/ai/results/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53490 - "OPTIONS /api/ai/tags/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53492 - "GET /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53484 - "GET /api/docs/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:53479 - "GET /api/ai/results/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:53486 - "GET /api/ai/tags/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:53486 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "OPTIONS /api/docs/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53486 - "DELETE /api/docs/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53486 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53486 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53486 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "OPTIONS /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53486 - "OPTIONS /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53513 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53513 - "OPTIONS /api/products/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/products/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53479 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53547 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53548 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53586 - "POST /api/openclaw/message HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53619 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53619 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53842 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53842 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53842 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53844 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54337 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54335 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54337 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54340 - "GET /icons/DOC%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54432 - "OPTIONS /api/docs/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54434 - "OPTIONS /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "OPTIONS /api/ai/results/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54436 - "OPTIONS /api/ai/tags/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54434 - "GET /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54432 - "GET /api/docs/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:54439 - "GET /api/ai/results/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:54435 - "GET /api/ai/tags/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:54439 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54439 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54439 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "OPTIONS /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54439 - "OPTIONS /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54440 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54486 - "OPTIONS /api/products/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54486 - "GET /api/products/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54516 - "GET /assets/MyAsset-BMViiHxZ.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54565 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54565 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54819 - "POST /api/openclaw/message HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54906 - "POST /api/openclaw/message HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55268 - "OPTIONS /api/docs/?doc_type=note HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55268 - "GET /api/docs/?doc_type=note HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55272 - "OPTIONS /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55273 - "OPTIONS /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55273 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55272 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55277 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55275 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55306 - "OPTIONS /api/ai/tags/by-level1/%E8%A1%A3%E9%A3%9F%E4%BD%8F%E8%A1%8C HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55308 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55306 - "GET /api/ai/tags/by-level1/%E8%A1%A3%E9%A3%9F%E4%BD%8F%E8%A1%8C HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55308 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55306 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55308 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55306 - "GET /api/ai/tags/by-level1/%E8%A1%A3%E9%A3%9F%E4%BD%8F%E8%A1%8C HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "OPTIONS /api/ai/tags/by-level1/%E5%81%A5%E5%BA%B7%E8%BA%AB%E5%BF%83 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "GET /api/ai/tags/by-level1/%E5%81%A5%E5%BA%B7%E8%BA%AB%E5%BF%83 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "OPTIONS /api/ai/tags/by-level1/%E7%B2%BE%E7%A5%9E%E4%B8%96%E7%95%8C HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "GET /api/ai/tags/by-level1/%E7%B2%BE%E7%A5%9E%E4%B8%96%E7%95%8C HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "OPTIONS /api/ai/tags/by-level1/%E8%A1%A8%E8%BE%BE%E7%89%B9%E8%B4%A8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "GET /api/ai/tags/by-level1/%E8%A1%A8%E8%BE%BE%E7%89%B9%E8%B4%A8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55354 - "OPTIONS /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55363 - "GET /assets/Consistency-iUrnbl2W.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "OPTIONS /api/consistency/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/consistency/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55366 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55356 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55403 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55401 - "GET /api/ai/tags/by-level1/%E8%A1%A8%E8%BE%BE%E7%89%B9%E8%B4%A8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55498 - "GET /assets/EngineerPage-BT1HGwTf.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55612 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55612 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55614 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55612 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55637 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55636 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55786 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55786 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55786 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55786 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55786 - "OPTIONS /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55785 - "OPTIONS /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55788 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55786 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55853 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55853 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55866 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55967 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56067 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60093 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60093 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60097 - "GET /icons/HTML%E5%9B%BE%E6%A0%87.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60096 - "OPTIONS /api/docs/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60093 - "OPTIONS /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "OPTIONS /api/ai/results/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60111 - "OPTIONS /api/ai/tags/%3Aid HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60113 - "GET /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "GET /api/docs/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:60093 - "GET /api/ai/results/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:60094 - "GET /api/ai/tags/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:60094 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60093 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60093 - "GET /api/docs/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:60094 - "GET /api/ai/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "GET /api/ai/results/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:60113 - "GET /api/ai/tags/%3Aid HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:60113 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60113 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60113 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /inbox/documents HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60138 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60138 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60138 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60143 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60139 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60139 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60143 - "GET /icons/logo.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60138 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60146 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60143 - "GET /assets/Messages-FulmzqcS.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60146 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60143 - "GET /assets/Documents-T4C7WxZw.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60146 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60152 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60143 - "GET /assets/Videos-BWGv5d7v.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60152 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60146 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60143 - "GET /assets/Audios-B6B3AHi5.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60146 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60152 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60143 - "GET /assets/WebPages-CAHS60C-.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60152 - "OPTIONS /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60146 - "OPTIONS /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60152 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60146 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "GET /inbox/webpages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60817 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60824 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60824 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60824 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60826 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60824 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60826 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60824 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60818 - "GET /icons/DOC%E5%9B%BE%E6%A0%87.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60824 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60826 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60826 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60824 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60830 - "GET /inbox/audios HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60830 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60828 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60831 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60831 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60832 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60912 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60831 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60832 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60912 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60915 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60915 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60832 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60912 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60832 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60912 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61015 - "GET /knowledge/course HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61015 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61018 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/Messages-FulmzqcS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/Documents-T4C7WxZw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61028 - "GET /icons/DOC%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /icons/HTML%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/Videos-BWGv5d7v.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/Audios-B6B3AHi5.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/WebPages-CAHS60C-.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "OPTIONS /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "OPTIONS /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61027 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/ProfileTagPage-Bg1dpZaa.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61020 - "OPTIONS /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61027 - "OPTIONS /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /assets/AgentPage-BkraYuVL.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61016 - "GET /assets/RecycleBin-Cv-bRAij.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61018 - "OPTIONS /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61020 - "GET /api/recycle/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61245 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61238 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61240 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61240 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61240 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61240 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "OPTIONS /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61240 - "OPTIONS /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61256 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61260 - "GET /assets/Products-DAGGHGO2.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61238 - "OPTIONS /api/products/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61256 - "GET /api/products/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61256 - "GET /api/docs/?doc_type=web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/subscriptions/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61238 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61265 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61265 - "GET /assets/MyAction-CXFmTDPY.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61265 - "GET /assets/MyAsset-BMViiHxZ.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61615 - "GET /knowledge/asset HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61615 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61619 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61619 - "OPTIONS /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61621 - "OPTIONS /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61623 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61619 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61656 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61657 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61656 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61658 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61656 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61657 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61658 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61658 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61670 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61670 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61658 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61657 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61658 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61657 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62083 - "GET /knowledge/course HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62083 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62106 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62084 - "GET /assets/ProfileTagPage-Bg1dpZaa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62106 - "OPTIONS /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62118 - "OPTIONS /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62120 - "GET /api/ai/taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62106 - "GET /api/ai/tags/by-level1/%E5%9F%BA%E7%A1%80%E7%94%BB%E5%83%8F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62084 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62084 - "GET /assets/MyAction-CXFmTDPY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62084 - "GET /assets/MyAsset-BMViiHxZ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62135 - "GET /assets/Messages-FulmzqcS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62137 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62137 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62137 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62140 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62141 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62140 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62142 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62141 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62137 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62139 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62171 - "GET /assets/Documents-T4C7WxZw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62173 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62139 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62173 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62176 - "GET /icons/DOC%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62171 - "GET /icons/HTML%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62176 - "GET /assets/Videos-BWGv5d7v.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62173 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62139 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62176 - "GET /assets/Audios-B6B3AHi5.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62139 - "OPTIONS /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62173 - "GET /api/docs/?doc_type=audio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62577 - "GET /knowledge/life HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62577 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62582 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62582 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62656 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "OPTIONS /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /assets/Messages-FulmzqcS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "OPTIONS /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62833 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /assets/Documents-T4C7WxZw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "OPTIONS /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62833 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62846 - "GET /icons/DOC%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62837 - "GET /icons/HTML%E5%9B%BE%E6%A0%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62846 - "GET /assets/Videos-BWGv5d7v.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "OPTIONS /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62833 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62833 - "GET /api/docs/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62831 - "GET /api/folders/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62845 - "GET /api/docs/?doc_type=video HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62845 - "GET /api/messages/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63074 - "GET /inbox/messages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63074 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63074 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63074 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63074 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /assets/MyAction-CXFmTDPY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63076 - "GET /assets/MyAsset-BMViiHxZ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63087 - "GET /knowledge/asset HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63087 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63087 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63087 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63088 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63093 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63087 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63088 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63093 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63093 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63088 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63088 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63093 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/MyAction-CXFmTDPY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/MyAsset-BMViiHxZ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/AgentPage-BkraYuVL.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/ProfileTagPage-Bg1dpZaa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/Messages-FulmzqcS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/Documents-T4C7WxZw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/Videos-BWGv5d7v.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/Audios-B6B3AHi5.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/WebPages-CAHS60C-.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63101 - "GET /assets/Products-DAGGHGO2.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63164 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63164 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63169 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63168 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63168 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63169 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63164 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63169 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63164 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63169 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 200 OK

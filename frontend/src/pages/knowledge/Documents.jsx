@@ -261,7 +261,7 @@ export default function Documents() {
             {/* ===== Toolbar ===== */}
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <button className="btn btn-primary km-upload-btn" style={{ marginLeft: -4, borderRadius: 6 }} onClick={() => setUploadOpen(true)}>
+                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 6 }} onClick={() => setUploadOpen(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
                         手工上传
                     </button>
@@ -319,7 +319,7 @@ export default function Documents() {
             )}
 
             {/* ===== Type Filters ===== */}
-            <div className="km-type-filters" style={{ marginLeft: -4 }}>
+            <div className="km-type-filters" >
                 {typeFilters.map(f => (
                     <button key={f.key} className={`km-type-chip ${typeFilter === f.key ? 'active' : ''}`} onClick={() => setTypeFilter(f.key)}>{f.label}</button>
                 ))}

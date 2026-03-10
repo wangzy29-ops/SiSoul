@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+chromadb
+httpx
+python-multipart
+python-docx
+pdfplumber
+openpyxl
+python-pptx
+beautifulsoup4
+dashscope
+edge-tts
