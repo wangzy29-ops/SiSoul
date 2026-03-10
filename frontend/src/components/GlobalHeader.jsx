@@ -26,9 +26,9 @@ export default function GlobalHeader() {
             {/* Left Box: Logo & App Name */}
             <div className="gh-left">
                 <div className="gh-logo-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img src="/icons/logo_new.jpg" alt="MemoryHub Logo" style={{ height: 44, width: 'auto', objectFit: 'contain', display: 'block', borderRadius: 10 }} />
+                    <img src="/icons/logo_new.jpg" alt="MemoryHub Logo" style={{ height: 40, width: 'auto', objectFit: 'contain', display: 'block', borderRadius: 10 }} />
                 </div>
-                <div className="gh-app-name" style={{ fontFamily: 'Impact, sans-serif', fontSize: 32, letterSpacing: 0.5, userSelect: 'none', marginLeft: 12 }}>
+                <div className="gh-app-name" style={{ fontFamily: 'Impact, sans-serif', fontSize: 30, letterSpacing: 0.5, userSelect: 'none', marginLeft: 16 }}>
                     <span style={{ color: '#67bed9' }}>Si</span>
                     <span style={{ color: '#000' }}>Soul</span>
                 </div>

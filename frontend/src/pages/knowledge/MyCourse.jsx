@@ -199,7 +199,7 @@ export default function MyCourse() {
         <div className="page-enter">
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>MyCourse 学习</h2>
+                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: 0 }}>MyCourse 学习</h2>
                 </div>
             </div>
 

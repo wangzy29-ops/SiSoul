@@ -5,7 +5,7 @@ export default function MyAction() {
         <div className="page-enter">
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>MyAction 行为</h2>
+                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: 0 }}>MyAction 行为</h2>
                 </div>
             </div>
             <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)', margin: '0 0 20px 0' }}>

@@ -319,7 +319,7 @@ export default function Documents() {
             )}
 
             {/* ===== Type Filters ===== */}
-            <div className="km-type-filters" >
+            <div className="km-type-filters" style={{ marginLeft: 0 }}>
                 {typeFilters.map(f => (
                     <button key={f.key} className={`km-type-chip ${typeFilter === f.key ? 'active' : ''}`} onClick={() => setTypeFilter(f.key)}>{f.label}</button>
                 ))}

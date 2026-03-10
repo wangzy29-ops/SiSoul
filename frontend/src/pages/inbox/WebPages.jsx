@@ -96,7 +96,7 @@ export default function WebPages() {
             </div>
 
             {/* Tabs */}
-            <div className="km-type-filters" >
+            <div className="km-type-filters" style={{ marginLeft: 0 }}>
                 <button
                     className={`km-type-chip ${tab === 'manual' ? 'active' : ''}`}
                     onClick={() => setTab('manual')}

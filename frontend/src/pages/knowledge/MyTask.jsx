@@ -77,7 +77,7 @@ export default function MyTask() {
         <div className="page-enter">
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>MyTask 任务</h2>
+                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: 0 }}>MyTask 任务</h2>
                 </div>
             </div>
             <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)', margin: '0 0 16px 0' }}>

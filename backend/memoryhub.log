@@ -412,3 +412,46 @@ INFO:     127.0.0.1:63164 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
 INFO:     127.0.0.1:63169 - "GET /favicon.ico HTTP/1.1" 404 Not Found
 INFO:     127.0.0.1:63164 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
 INFO:     127.0.0.1:63169 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65216 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65216 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65217 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65218 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65218 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65217 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65216 - "GET /icons/logo.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65216 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65217 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65216 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65216 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65217 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:65216 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65382 - "GET /knowledge/course HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65382 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65383 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65383 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65432 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65433 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65433 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65383 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65432 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49182 - "GET /assets/MyLife-MIpevvTQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49185 - "GET /assets/EmptyState-C0G3TXLY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49182 - "GET /assets/MyCourse-D8rg3D5i.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49185 - "GET /assets/Modal-mfiZ_pB9.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49182 - "GET /assets/MyTask-Cf5ajhmh.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49182 - "GET /assets/MyAction-CXFmTDPY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49436 - "GET /assets/Messages-FulmzqcS.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49436 - "GET /assets/ProfileTagPage-Bg1dpZaa.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49436 - "GET /assets/AgentPage-BkraYuVL.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49436 - "GET /assets/RecycleBin-Cv-bRAij.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50596 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50744 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50915 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50915 - "GET /assets/index-Ob-oHLuT.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50916 - "GET /assets/vendor-DwB6R1Fg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50917 - "GET /assets/index-BUVZJ-y6.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50915 - "GET /assets/Home-B-zJWqYa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50917 - "GET /assets/index-Cv9VGwTO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50916 - "GET /icons/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50916 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+/Users/wangziyu/Documents/Qoder/memoryhub/backend/start.sh: line 4: 56325 Killed: 9               /usr/bin/python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8899

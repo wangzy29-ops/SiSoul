@@ -32,7 +32,7 @@ export default function MyLife() {
                             <svg viewBox="0 0 24 24" width="14" height="14" style={{ stroke: 'currentColor', strokeWidth: 2, fill: 'none', marginRight: 4 }}><polyline points="15 18 9 12 15 6" /></svg>
                             返回
                         </button>
-                        <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: -8 }}>{folder.icon} {folder.name}</h2>
+                        <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: 0 }}>{folder.icon} {folder.name}</h2>
                     </div>
                 </div>
                 <EmptyState icon={folder.icon} title={`${folder.name} - 暂无内容`} desc={`${folder.desc}。后续由 AI 自动从碎片中归类映射。`} />
@@ -44,7 +44,7 @@ export default function MyLife() {
         <div className="page-enter">
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>MyLife 生活</h2>
+                    <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: 0 }}>MyLife 生活</h2>
                 </div>
             </div>
             <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)', margin: '0 0 20px 0' }}>

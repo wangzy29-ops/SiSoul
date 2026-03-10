@@ -154,7 +154,7 @@ a {
 .gh-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 2px;
 }
 
 .gh-logo-box {
@@ -165,11 +165,12 @@ a {
 
 .gh-app-name {
   font-family: 'Impact', 'Inter', sans-serif;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 800;
   /* Extra bold for "艺术加粗字体" */
   letter-spacing: 0.5px;
   user-select: none;
+  margin-left: 16px;
 }
 
 .gh-right {
@@ -1515,8 +1516,7 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px 12px 0;
-  margin-left: -20px;
-  /* Changed from 12px 20px 12px 10px */
+  /* margin-left removed - now handled by h2 */
   gap: 12px;
   border-bottom: 1px solid var(--color-border-light);
   flex-wrap: wrap;
@@ -1643,8 +1643,7 @@ a {
   align-items: center;
   gap: 8px;
   padding: 12px 20px 12px 0;
-  margin-left: -20px;
-  /* Changed from 12px 20px */
+  /* margin-left removed - now handled by inline styles */
   border-bottom: 1px solid var(--color-border-light);
   flex-wrap: wrap;
 }

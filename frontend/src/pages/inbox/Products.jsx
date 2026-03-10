@@ -125,7 +125,7 @@ export default function Products() {
             </div>
 
             {/* Platform Tabs */}
-            <div className="km-type-filters">
+            <div className="km-type-filters" style={{ marginLeft: 0 }}>
                 {PLATFORM_TABS.map(t => (
                     <button
                         key={t.key}

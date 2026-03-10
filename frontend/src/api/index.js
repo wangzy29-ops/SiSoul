@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8899';
+const API_BASE = '';  // Use relative path to support both localhost and 127.0.0.1
 
 async function request(path, options = {}) {
   const url = `${API_BASE}${path}`;

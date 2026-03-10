@@ -70,7 +70,7 @@ export default function Messages() {
             </div>
 
             {/* Sub-type Tabs */}
-            <div className="km-type-filters">
+            <div className="km-type-filters" style={{ marginLeft: 0 }}>
                 {SUB_TYPE_TABS.map(t => (
                     <button
                         key={t.key}
