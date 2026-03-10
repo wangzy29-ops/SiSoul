@@ -1535,7 +1535,7 @@ a {
 }
 
 .km-upload-btn {
-  border-radius: var(--radius-full) !important;
+  border-radius: 8px;
   padding: 0 24px !important;
   height: 34px !important;
   font-weight: 600 !important;
@@ -1653,7 +1653,7 @@ a {
   align-items: center;
   height: 30px;
   padding: 0 16px;
-  border-radius: var(--radius-full);
+  border-radius: 8px;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   font-family: var(--font-family);

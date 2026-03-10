@@ -74,7 +74,7 @@ export default function WebPages() {
             {/* Toolbar */}
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 2 }} onClick={() => setAddOpen(true)}>
+                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 8 }} onClick={() => setAddOpen(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16" style={{ stroke: 'currentColor', strokeWidth: 1.8, fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }}><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
                         新建网页
                     </button>

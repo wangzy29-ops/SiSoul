@@ -201,7 +201,7 @@ export default function DocumentDetail() {
                     className="btn btn-outline"
                     onClick={() => handleRegenerate(type)}
                     disabled={isLoading}
-                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 2 }}
+                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 8 }}
                 >
                     {isLoading ? (
                         <><div className="spinner" style={{ width: 12, height: 12 }} /> 生成中...</>
@@ -381,7 +381,7 @@ export default function DocumentDetail() {
                                     className="btn btn-outline"
                                     onClick={handleGenerateTags}
                                     disabled={aiLoading.tags}
-                                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 2 }}
+                                    style={{ fontSize: 12, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, borderRadius: 8 }}
                                 >
                                     {aiLoading.tags ? (
                                         <><div className="spinner" style={{ width: 12, height: 12 }} /> 分析中...</>

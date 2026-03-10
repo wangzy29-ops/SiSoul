@@ -126,7 +126,7 @@ export default function ProductDetail() {
                         <h1 style={{ fontSize: 20, marginBottom: 12, lineHeight: 1.4 }}>{product.title}</h1>
                         <button
                             className="btn btn-primary"
-                            style={{ flexShrink: 0, marginLeft: 16 }}
+                            style={{ flexShrink: 0, marginLeft: 16, borderRadius: 8 }}
                             onClick={() => window.open(product.source_url, '_blank')}
                         >
                             前往购买 🛒

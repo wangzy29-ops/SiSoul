@@ -68,7 +68,7 @@ export default function Audios() {
             {/* Toolbar */}
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <label className="btn btn-primary km-upload-btn" style={{borderRadius: 2, cursor: uploading ? 'not-allowed' : 'pointer' }}>
+                    <label className="btn btn-primary km-upload-btn" style={{borderRadius: 8, cursor: uploading ? 'not-allowed' : 'pointer' }}>
                         <svg viewBox="0 0 24 24" width="16" height="16" style={{ stroke: 'currentColor', strokeWidth: 1.8, fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }}><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
                         {uploading ? '上传中...' : '新增音频'}
                         <input type="file" style={{ display: 'none' }} accept="audio/*,.mp3,.wav,.ogg,.m4a" onChange={handleUpload} disabled={uploading} />

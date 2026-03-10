@@ -108,7 +108,7 @@ export default function Products() {
                         <input type="text" placeholder="搜索商品..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                     </div>
 
-                    <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 6, height: 34, padding: '0 16px', borderRadius: 2 }} onClick={() => setShowAddModal(true)}>
+                    <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 6, height: 34, padding: '0 16px', borderRadius: 8 }} onClick={() => setShowAddModal(true)}>
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
                         录入商品链接
                     </button>

@@ -68,7 +68,7 @@ export default function Videos() {
             {/* Toolbar */}
             <div className="km-toolbar">
                 <div className="km-toolbar-left">
-                    <label className="btn btn-primary km-upload-btn" style={{borderRadius: 2, cursor: uploading ? 'not-allowed' : 'pointer' }}>
+                    <label className="btn btn-primary km-upload-btn" style={{borderRadius: 8, cursor: uploading ? 'not-allowed' : 'pointer' }}>
                         <svg viewBox="0 0 24 24" width="16" height="16" style={{ stroke: 'currentColor', strokeWidth: 1.8, fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }}><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>
                         {uploading ? '上传中...' : '新增视频'}
                         <input type="file" style={{ display: 'none' }} accept="video/*,.mp4,.avi,.wmv,.webm" onChange={handleUpload} disabled={uploading} />
