@@ -56,17 +56,6 @@ async def on_startup():
         db.add(User(id=1, name="default"))
         db.commit()
 
-    # 预创建默认文件夹
-    DEFAULT_FOLDERS = ["我的衣柜", "我的健康档案", "我的账单", "我的饭桌"]
-    for fname in DEFAULT_FOLDERS:
-        exists = db.query(DocumentFolder).filter(
-            DocumentFolder.user_id == 1,
-            DocumentFolder.name == fname,
-            DocumentFolder.parent_id == None,
-        ).first()
-        if not exists:
-            db.add(DocumentFolder(user_id=1, name=fname, parent_id=None))
-    db.commit()
     db.close()
 
     # 启动后台服务

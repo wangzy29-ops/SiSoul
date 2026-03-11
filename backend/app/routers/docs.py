@@ -15,12 +15,15 @@ router = APIRouter(prefix="/api/docs", tags=["docs"])
 @router.get("/", response_model=List[DocumentOut])
 async def list_documents(
     doc_type: Optional[str] = None,
+    folder_id: Optional[int] = None,
     db: Session = Depends(get_db),
 ):
     user_id = 1
     q = db.query(Document).filter(Document.user_id == user_id)
     if doc_type:
         q = q.filter(Document.doc_type == doc_type)
+    if folder_id is not None:
+        q = q.filter(Document.folder_id == folder_id)
     docs = q.order_by(Document.created_at.desc()).all()
     return docs
 

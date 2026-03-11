@@ -26,12 +26,13 @@ from ..config import get_settings
 from ..database import SessionLocal
 from ..models import Document, DocumentContent, Source, Message, Product
 from . import parsing_service, ai_service
+from .ai_worker import enqueue as enqueue_ai
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
 
 # 存储下载的媒体文件的目录
-MEDIA_DIR = "/Users/wangziyu/MemoryHub/media"
+MEDIA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "media")
 os.makedirs(MEDIA_DIR, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -261,9 +262,21 @@ async def _process_image_message(
     """处理图片消息 → 图片存文档目录(doc_type=image) + 消息记录(sub_type=image_msg)。"""
     send_time = _parse_timestamp(timestamp)
     doc = None
+    local_path = None
 
     if media_url:
-        local_path = await _download_media(media_url, "image")
+        # 支持 file:// 协议
+        if media_url.startswith("file://"):
+            file_path = media_url[7:]
+            if os.path.exists(file_path):
+                safe_name = os.path.basename(file_path)
+                dest_path = os.path.join(MEDIA_DIR, safe_name)
+                import shutil
+                shutil.copy2(file_path, dest_path)
+                local_path = dest_path
+        else:
+            local_path = await _download_media(media_url, "image")
+        
         if local_path:
             title = _generate_title_from_content(description) or "未命名图片"
             doc = Document(
@@ -291,6 +304,17 @@ async def _process_image_message(
             db.add(doc_content)
             db.commit()
             parsing_service.chunk_and_index_text(db, doc, full_content)
+            
+            # 自动分类到知识目录
+            try:
+                from .knowledge_service import auto_classify_and_move
+                if auto_classify_and_move(db, doc):
+                    logger.info("图片已自动分类到知识目录: doc_id=%d", doc.id)
+            except Exception as e:
+                logger.warning("自动分类失败: doc_id=%d, error=%s", doc.id, e)
+            
+            # 加入 AI 处理队列（智能打标）
+            enqueue_ai(doc.id)
 
     # 消息记录
     action_desc = f"发送了图片: {description or '(图片)'}"
@@ -348,6 +372,17 @@ async def _process_audio_message(
             db.commit()
             parsing_service.chunk_and_index_text(db, doc, full_content)
 
+            # 自动分类到知识目录
+            try:
+                from .knowledge_service import auto_classify_and_move
+                if auto_classify_and_move(db, doc):
+                    logger.info("音频已自动分类到知识目录: doc_id=%d", doc.id)
+            except Exception as e:
+                logger.warning("自动分类失败: doc_id=%d, error=%s", doc.id, e)
+
+            # 加入 AI 处理队列（智能打标）
+            enqueue_ai(doc.id)
+
     action_desc = f"发送了语音消息: {description or '(音频)'}"
     msg = Message(
         user_id=1,
@@ -400,6 +435,17 @@ async def _process_video_message(
             db.add(doc_content)
             db.commit()
             parsing_service.chunk_and_index_text(db, doc, full_content)
+
+            # 自动分类到知识目录
+            try:
+                from .knowledge_service import auto_classify_and_move
+                if auto_classify_and_move(db, doc):
+                    logger.info("视频已自动分类到知识目录: doc_id=%d", doc.id)
+            except Exception as e:
+                logger.warning("自动分类失败: doc_id=%d, error=%s", doc.id, e)
+
+            # 加入 AI 处理队列（智能打标）
+            enqueue_ai(doc.id)
 
     action_desc = f"发送了视频: {description or '(视频)'}"
     msg = Message(
@@ -498,6 +544,9 @@ async def _process_file_message(
                 logger.info("文件已自动分类到知识目录: doc_id=%d", doc.id)
         except Exception as e:
             logger.warning("自动分类失败: doc_id=%d, error=%s", doc.id, e)
+        
+        # 加入 AI 处理队列（智能打标）
+        enqueue_ai(doc.id)
     else:
         logger.warning("文件下载失败: %s", file_name or description)
 

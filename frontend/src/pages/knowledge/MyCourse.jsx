@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { notesApi, docsApi } from '../../api';
+import { useNavigate } from 'react-router-dom';
+import { notesApi, docsApi, foldersApi } from '../../api';
 import Modal from '../../components/Modal';
 import EmptyState from '../../components/EmptyState';
 import SimpleEditor from '../../components/SimpleEditor';
@@ -182,12 +183,108 @@ function NotesPanel() {
 
 /* ---- Knowledge List Panel (for papers/webknow/llm tabs) ---- */
 function KnowledgeListPanel({ tab }) {
+    const [docs, setDocs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    
+    // 文件夹名称映射
+    const folderMap = {
+        'papers': '论文书籍',
+        'webknow': '网页知识', 
+        'llm': '大模型相关',
+    };
+    
+    useEffect(() => {
+        const loadDocs = async () => {
+            setLoading(true);
+            try {
+                // 先获取所有文件夹
+                const folders = await foldersApi.list();
+                const folderName = folderMap[tab.key];
+                const folder = folders.find(f => f.name === folderName);
+                
+                if (folder) {
+                    // 加载该文件夹下的文档
+                    const data = await docsApi.list({ folder_id: folder.id });
+                    setDocs(Array.isArray(data) ? data : []);
+                } else {
+                    setDocs([]);
+                }
+            } catch (e) {
+                console.error('加载文档失败:', e);
+                setDocs([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+        
+        if (tab.key !== 'notes') {
+            loadDocs();
+        }
+    }, [tab.key]);
+    
+    const formatDate = (d) => {
+        if (!d) return '-';
+        const dt = new Date(d);
+        return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+    };
+    
+    const getDocIcon = (type) => {
+        const icons = {
+            'web': '🌐', 'pdf': '📄', 'doc': '📝', 'docx': '📝',
+            'xls': '📊', 'ppt': '📽️', 'txt': '📃', 'note': '📝',
+            'image': '🖼️', 'audio': '🎵', 'video': '🎬',
+        };
+        return icons[type] || '📁';
+    };
+    
+    const handleClick = (doc) => {
+        navigate(`/inbox/documents/${doc.id}`);
+    };
+    
+    if (loading) {
+        return <div style={{ textAlign: 'center', padding: 60, color: 'var(--color-text-muted)' }}>加载中...</div>;
+    }
+    
+    if (docs.length === 0) {
+        return (
+            <EmptyState
+                icon={tab.icon}
+                title={`${tab.label} - 暂无内容`}
+                desc={`${tab.desc}。后续由 AI 大模型自动从碎片源文件中提炼并归类。`}
+            />
+        );
+    }
+    
     return (
-        <EmptyState
-            icon={tab.icon}
-            title={`${tab.label} - 暂无内容`}
-            desc={`${tab.desc}。后续由 AI 大模型自动从碎片源文件中提炼并归类。`}
-        />
+        <>
+            <div className="km-type-filters" style={{ marginBottom: 12 }}>
+                <span className="km-file-count">{docs.length} 个文档</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {docs.map(doc => (
+                    <div 
+                        key={doc.id} 
+                        className="card" 
+                        style={{ padding: '12px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}
+                        onClick={() => handleClick(doc)}
+                    >
+                        <span style={{ fontSize: 24 }}>{getDocIcon(doc.doc_type)}</span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {doc.title}
+                            </div>
+                            <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 2 }}>
+                                {formatDate(doc.created_at)} · {doc.doc_type || '文档'}
+                            </div>
+                        </div>
+                        <svg viewBox="0 0 24 24" width="16" height="16" style={{ stroke: 'var(--color-text-muted)', strokeWidth: 2, fill: 'none' }}>
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </div>
+                ))}
+            </div>
+        </>
     );
 }
 

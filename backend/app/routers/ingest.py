@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/ingest", tags=["ingest"])
 
-BASE_DATA_DIR = Path(os.getenv("MEMORYHUB_DATA_DIR", "/Users/wangziyu/MemoryHub/data"))
+BASE_DATA_DIR = Path(os.getenv("MEMORYHUB_DATA_DIR", "./data"))
 
 
 @router.post("/upload_file", response_model=DocumentOut)
@@ -160,6 +160,14 @@ async def ingest_web(payload: UrlCreate, db: Session = Depends(get_db)):
     db.refresh(doc)
 
     parsing_service.fetch_and_parse_web(db, doc, str(payload.url))
+
+    # 自动分类到知识目录
+    try:
+        from ..services.knowledge_service import auto_classify_and_move
+        if auto_classify_and_move(db, doc):
+            logger.info("网页已自动分类到知识目录: doc_id=%d", doc.id)
+    except Exception as e:
+        logger.warning("网页自动分类失败: doc_id=%d, error=%s", doc.id, e)
 
     # 推入 AI 后台队列
     enqueue_ai(doc.id)

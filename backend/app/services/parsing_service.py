@@ -249,6 +249,11 @@ def fetch_and_parse_web(db, document: Document, url: str) -> None:
         cleaned_text=text,
     )
     db.add(content)
+    
+    # 更新文档状态为已解析
+    document.status = "parsed"
+    db.add(document)
+    
     db.commit()
 
     chunk_and_index_text(db, document, text)

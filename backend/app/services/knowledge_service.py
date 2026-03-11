@@ -20,7 +20,7 @@ from .ai_service import _call_llm, _truncate_for_prompt
 logger = logging.getLogger(__name__)
 
 # 知识目录根路径
-KNOWLEDGE_BASE_DIR = Path("/Users/wangziyu/MemoryHub/知识 Knowledge")
+KNOWLEDGE_BASE_DIR = Path("/Users/wangziyu/Documents/Qoder/memoryhub/backend/知识 Knowledge")
 
 # 知识目录结构定义
 KNOWLEDGE_STRUCTURE = {
@@ -154,10 +154,18 @@ def classify_document(db: Session, doc: Document, user_id: int = 1) -> Tuple[Opt
     # 确保知识目录已初始化
     folders_map = init_knowledge_folders(db, user_id)
     
-    # 获取文档内容
+    # 重新查询文档内容（确保获取最新数据）
+    from ..models import DocumentContent
+    content_obj = (
+        db.query(DocumentContent)
+        .filter(DocumentContent.document_id == doc.id)
+        .order_by(DocumentContent.version.desc())
+        .first()
+    )
+    
     content = ""
-    if doc.contents:
-        content = doc.contents[0].cleaned_text or doc.contents[0].raw_text or ""
+    if content_obj:
+        content = content_obj.cleaned_text or content_obj.raw_text or ""
     
     if not content and doc.title:
         content = doc.title
@@ -269,6 +277,21 @@ def auto_classify_and_move(db: Session, doc: Document, user_id: int = 1) -> bool
         doc.folder_id = folder.id
         db.commit()
         db.refresh(doc)
+        
+        # 复制文件到知识目录
+        try:
+            import shutil
+            folder_path = get_folder_path(folder, db)
+            folder_path.mkdir(parents=True, exist_ok=True)
+            
+            if doc.original_path and os.path.exists(doc.original_path):
+                src_path = Path(doc.original_path)
+                dest_path = folder_path / src_path.name
+                shutil.copy2(src_path, dest_path)
+                logger.info(f"文件已复制到知识目录: {dest_path}")
+        except Exception as e:
+            logger.warning(f"文件复制到知识目录失败: {e}")
+        
         logger.info(f"文档 {doc.id} 已分类到 {folder.name}, 理由: {reason}")
         return True
     

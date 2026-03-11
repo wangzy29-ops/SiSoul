@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import EmptyState from '../../components/EmptyState';
+import { docsApi } from '../../api';
 
 const folders = [
-    { key: 'diet', name: '我的饮食', icon: '🍽️', desc: '菜谱、营养计划、餐厅打卡记录' },
-    { key: 'health', name: '我的健康', icon: '💊', desc: '体检报告、医疗记录、睡眠与生理数据' },
-    { key: 'fitness', name: '我的运动', icon: '🏃', desc: '训练计划、运动数据追踪、健身目标' },
-    { key: 'wardrobe', name: '我的衣柜', icon: '👔', desc: '衣服照片、穿搭记录、尺码记录' },
-    { key: 'travel', name: '我的出行', icon: '✈️', desc: '行程单、护照签证扫描件、旅行攻略' },
-    { key: 'daily', name: '我的日常', icon: '🏠', desc: '设备说明书、日常生活技巧' },
+    { key: 'diet', name: '我的饮食', icon: '🍽️', desc: '菜谱、营养计划、餐厅打卡记录', folderId: 15 },
+    { key: 'health', name: '我的健康', icon: '💊', desc: '体检报告、医疗记录、睡眠与生理数据', folderId: 16 },
+    { key: 'fitness', name: '我的运动', icon: '🏃', desc: '训练计划、运动数据追踪、健身目标', folderId: 17 },
+    { key: 'wardrobe', name: '我的衣柜', icon: '👔', desc: '衣服照片、穿搭记录、尺码记录', folderId: 18 },
+    { key: 'travel', name: '我的出行', icon: '✈️', desc: '行程单、护照签证扫描件、旅行攻略', folderId: 19 },
+    { key: 'daily', name: '我的日常', icon: '🏠', desc: '设备说明书、日常生活技巧', folderId: 20 },
 ];
 
 /* Folder open SVG icon */
@@ -20,7 +22,28 @@ const FolderIcon = ({ color = '#f59e0b' }) => (
 const folderColors = ['#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4'];
 
 export default function MyLife() {
+    const navigate = useNavigate();
     const [activeFolder, setActiveFolder] = useState(null);
+    const [docs, setDocs] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (activeFolder) {
+            const folder = folders.find(f => f.key === activeFolder);
+            if (folder && folder.folderId) {
+                setLoading(true);
+                docsApi.list({ folder_id: folder.folderId })
+                    .then(data => setDocs(Array.isArray(data) ? data : []))
+                    .catch(() => setDocs([]))
+                    .finally(() => setLoading(false));
+            }
+        }
+    }, [activeFolder]);
+
+    const getTypeIcon = (type) => {
+        const icons = { pdf: '📄', doc: '📝', word: '📝', image: '🖼️', video: '🎬', audio: '🎵', web: '🌐', txt: '📃' };
+        return icons[type] || '📎';
+    };
 
     if (activeFolder) {
         const folder = folders.find(f => f.key === activeFolder);
@@ -35,7 +58,31 @@ export default function MyLife() {
                         <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600, marginLeft: 0 }}>{folder.icon} {folder.name}</h2>
                     </div>
                 </div>
-                <EmptyState icon={folder.icon} title={`${folder.name} - 暂无内容`} desc={`${folder.desc}。后续由 AI 自动从碎片中归类映射。`} />
+                {loading ? (
+                    <div style={{ padding: 40, textAlign: 'center', color: 'var(--color-text-muted)' }}>加载中...</div>
+                ) : docs.length === 0 ? (
+                    <EmptyState icon={folder.icon} title={`${folder.name} - 暂无内容`} desc={`${folder.desc}。后续由 AI 自动从碎片中归类映射。`} />
+                ) : (
+                    <div className="km-file-list" style={{ marginTop: 20 }}>
+                        {docs.map(doc => (
+                            <div
+                                key={doc.id}
+                                className="km-row"
+                                style={{ display: 'flex', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid var(--color-border)', cursor: 'pointer' }}
+                                onClick={() => navigate(`/inbox/documents/${doc.id}`)}
+                            >
+                                <span style={{ fontSize: 20, marginRight: 12 }}>{getTypeIcon(doc.doc_type)}</span>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontWeight: 500 }}>{doc.title}</div>
+                                    <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 2 }}>
+                                        {doc.doc_type} · {new Date(doc.created_at).toLocaleDateString()}
+                                    </div>
+                                </div>
+                                <span className={`km-status-badge km-status-${doc.status}`}>{doc.status}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         );
     }

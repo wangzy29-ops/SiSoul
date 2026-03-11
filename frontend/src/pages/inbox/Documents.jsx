@@ -97,6 +97,10 @@ export default function Documents() {
             ]);
             setDocs(Array.isArray(docsData) ? docsData : []);
             setFolders(Array.isArray(foldersData) ? foldersData : []);
+            // 默认展开所有文件夹
+            if (Array.isArray(foldersData) && foldersData.length > 0) {
+                setExpandedFolders(new Set(foldersData.map(f => f.id)));
+            }
         } catch {
             setDocs([]); setFolders([]);
         } finally {
@@ -168,21 +172,35 @@ export default function Documents() {
     const handleUpload = async () => {
         const files = fileRef.current?.files;
         if (!files?.length) return;
-        const fd = new FormData();
-        fd.append('file', files[0]);
-        // 如果在文件夹内，传递 folder_id
-        console.log('Upload - currentFolderId:', currentFolderId, 'type:', typeof currentFolderId);
-        if (currentFolderId) {
-            fd.append('folder_id', currentFolderId);
-            console.log('Upload - folder_id appended to FormData');
-        } else {
-            console.log('Upload - No folder_id (root directory)');
+        
+        // 并行上传所有文件，不阻塞UI
+        const uploadPromises = Array.from(files).map(file => {
+            const fd = new FormData();
+            fd.append('file', file);
+            if (currentFolderId) {
+                fd.append('folder_id', currentFolderId);
+            }
+            return docsApi.upload(fd).catch(e => {
+                console.error(`上传失败: ${file.name}`, e);
+                return { error: true, file: file.name, message: e.message };
+            });
+        });
+        
+        // 关闭上传弹窗，后台继续上传
+        setUploadOpen(false);
+        fileRef.current.value = ''; // 清空文件选择
+        
+        // 等待所有上传完成
+        const results = await Promise.all(uploadPromises);
+        
+        // 刷新列表
+        loadData();
+        
+        // 显示结果
+        const errors = results.filter(r => r.error);
+        if (errors.length > 0) {
+            alert(`${errors.length} 个文件上传失败:\n${errors.map(e => e.file).join('\n')}`);
         }
-        try {
-            const newDoc = await docsApi.upload(fd);
-            setUploadOpen(false);
-            loadData();
-        } catch (e) { alert('上传失败: ' + e.message); }
     };
 
     const handleDelete = async (id) => {
@@ -259,122 +277,273 @@ export default function Documents() {
         return crumbs;
     };
     const breadcrumb = getBreadcrumb();
+    
+    // 树形结构展开状态
+    const [expandedFolders, setExpandedFolders] = useState(new Set());
+    
+    // 切换文件夹展开状态
+    const toggleFolderExpand = (folderId, e) => {
+        e && e.stopPropagation();
+        setExpandedFolders(prev => {
+            const next = new Set(prev);
+            if (next.has(folderId)) {
+                next.delete(folderId);
+            } else {
+                next.add(folderId);
+            }
+            return next;
+        });
+    };
+    
+    // 渲染树形节点
+    const renderTreeNode = (folder, level = 0) => {
+        const children = folders.filter(f => f.parent_id === folder.id);
+        const hasChildren = children.length > 0;
+        const isExpanded = expandedFolders.has(folder.id);
+        const isActive = currentFolderId === folder.id;
+        const docCount = docs.filter(d => d.folder_id === folder.id).length;
+        
+        return (
+            <div key={folder.id}>
+                <div
+                    className={`tree-node ${isActive ? 'active' : ''}`}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '6px 8px',
+                        paddingLeft: 12 + level * 16,
+                        cursor: 'pointer',
+                        background: isActive ? 'var(--color-primary-light, #e0e7ff)' : 'transparent',
+                        borderRadius: 4,
+                        marginBottom: 2,
+                        transition: 'background 0.15s',
+                        position: 'relative',
+                    }}
+                    onClick={() => setCurrentFolderId(folder.id)}
+                    onMouseEnter={e => !isActive && (e.currentTarget.style.background = 'var(--color-bg-secondary, #f5f5f5)')}
+                    onMouseLeave={e => !isActive && (e.currentTarget.style.background = 'transparent')}
+                >
+                    {/* 展开/折叠按钮 */}
+                    <span
+                        style={{
+                            width: 16,
+                            height: 16,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginRight: 4,
+                            color: 'var(--color-text-muted)',
+                            cursor: hasChildren ? 'pointer' : 'default',
+                            visibility: hasChildren ? 'visible' : 'hidden',
+                        }}
+                        onClick={(e) => hasChildren && toggleFolderExpand(folder.id, e)}
+                    >
+                        <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" strokeWidth="2"
+                            style={{ transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </span>
+                    <FolderIcon size={18} color={isActive ? 'var(--color-primary)' : '#f59e0b'} />
+                    <span style={{
+                        flex: 1,
+                        marginLeft: 8,
+                        fontSize: 13,
+                        fontWeight: isActive ? 500 : 400,
+                        color: isActive ? 'var(--color-primary)' : 'var(--color-text)',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                    }}>
+                        {folder.name}
+                    </span>
+                    <span style={{
+                        fontSize: 11,
+                        color: 'var(--color-text-muted)',
+                        marginLeft: 4,
+                    }}>
+                        {docCount > 0 && docCount}
+                    </span>
+                    {/* 删除按钮 */}
+                    <button
+                        title="删除文件夹"
+                        className="tree-folder-del-btn"
+                        style={{
+                            opacity: 0,
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#ef4444',
+                            padding: 2,
+                            marginLeft: 4,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                        onClick={e => { e.stopPropagation(); handleDeleteFolder(folder.id); }}
+                    >
+                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" strokeWidth="2">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                    </button>
+                </div>
+                {/* 子文件夹 */}
+                {hasChildren && isExpanded && (
+                    <div>
+                        {children.map(child => renderTreeNode(child, level + 1))}
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     return (
-        <div className="page-enter">
-            {/* ===== Toolbar ===== */}
-            <div className="km-toolbar">
-                <div className="km-toolbar-left">
-                    <button className="btn btn-primary km-upload-btn" style={{borderRadius: 8 }} onClick={() => setUploadOpen(true)}>
-                        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
-                        手工上传
-                    </button>
-                    <button className="btn btn-outline km-upload-btn" style={{ borderRadius: 8 }} onClick={() => setNewFolderOpen(true)}>
+        <div className="page-enter" style={{ display: 'flex', gap: 0, height: 'calc(100vh - 120px)' }}>
+            {/* ===== 左侧文件夹树 ===== */}
+            <div style={{
+                width: 240,
+                minWidth: 240,
+                borderRight: '1px solid var(--color-border-light, #e5e7eb)',
+                background: 'var(--color-bg-primary, #fff)',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+            }}>
+                {/* 树形头部 */}
+                <div style={{
+                    padding: '12px 16px',
+                    borderBottom: '1px solid var(--color-border-light, #e5e7eb)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                }}>
+                    <span style={{ fontSize: 14, fontWeight: 600 }}>文件夹</span>
+                    <button
+                        title="新建文件夹"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', padding: 4 }}
+                        onClick={() => setNewFolderOpen(true)}
+                    >
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                             <line x1="12" y1="11" x2="12" y2="17" /><line x1="9" y1="14" x2="15" y2="14" />
                         </svg>
-                        新建文件夹
                     </button>
-                    {selected.size > 0 && (
-                        <>
-                            <button className="btn btn-outline km-action-btn" onClick={openMoveDialog}>
-                                <svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 12h14" /><path d="M12 5l7 7-7 7" /></svg>
-                                移动 ({selected.size})
-                            </button>
-                            <button className="btn btn-danger km-action-btn" onClick={handleBatchDelete}>
-                                <svg viewBox="0 0 24 24" width="15" height="15"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
-                                删除 ({selected.size})
-                            </button>
-                        </>
-                    )}
                 </div>
-                <div className="km-toolbar-right">
-                    <div className="km-search">
-                        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                        <input type="text" placeholder="搜索文件..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-                    </div>
-                    <div className="km-view-toggle">
-                        <button className={`km-view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} title="列表视图">
-                            <svg viewBox="0 0 24 24" width="16" height="16"><line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" /></svg>
-                        </button>
-                        <button className={`km-view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title="网格视图">
-                            <svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* ===== Breadcrumb ===== */}
-            {!searchQuery && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 8, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-                    {breadcrumb.map((crumb, i) => (
-                        <span key={crumb.id ?? 'root'} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                            {i > 0 && <span style={{ opacity: 0.4 }}>/</span>}
-                            <span
-                                style={{ cursor: i < breadcrumb.length - 1 ? 'pointer' : 'default', color: i < breadcrumb.length - 1 ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: i === breadcrumb.length - 1 ? 500 : 400 }}
-                                onClick={() => i < breadcrumb.length - 1 && setCurrentFolderId(crumb.id)}
-                            >
-                                {crumb.name}
-                            </span>
+                
+                {/* 树形内容 */}
+                <div style={{ flex: 1, overflow: 'auto', padding: '8px 0' }}>
+                    {/* 根目录 */}
+                    <div
+                        className={`tree-node ${currentFolderId === null ? 'active' : ''}`}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            padding: '6px 8px',
+                            paddingLeft: 12,
+                            cursor: 'pointer',
+                            background: currentFolderId === null ? 'var(--color-primary-light, #e0e7ff)' : 'transparent',
+                            borderRadius: 4,
+                            marginBottom: 2,
+                            margin: '0 8px 2px 8px',
+                        }}
+                        onClick={() => setCurrentFolderId(null)}
+                        onMouseEnter={e => currentFolderId !== null && (e.currentTarget.style.background = 'var(--color-bg-secondary, #f5f5f5)')}
+                        onMouseLeave={e => currentFolderId !== null && (e.currentTarget.style.background = 'transparent')}
+                    >
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" strokeWidth="2" style={{ marginRight: 8, color: 'var(--color-text-muted)' }}>
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                        <span style={{
+                            flex: 1,
+                            fontSize: 13,
+                            fontWeight: currentFolderId === null ? 500 : 400,
+                            color: currentFolderId === null ? 'var(--color-primary)' : 'var(--color-text)',
+                        }}>
+                            全部文件
                         </span>
-                    ))}
+                        <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
+                            {docs.filter(d => !d.folder_id).length}
+                        </span>
+                    </div>
+                    
+                    {/* 根级文件夹 */}
+                    {folders.filter(f => !f.parent_id).map(folder => renderTreeNode(folder))}
                 </div>
-            )}
-
-            {/* ===== Type Filters ===== */}
-            <div className="km-type-filters" style={{ marginLeft: 0 }}>
-                {typeFilters.map(f => (
-                    <button key={f.key} className={`km-type-chip ${typeFilter === f.key ? 'active' : ''}`} onClick={() => setTypeFilter(f.key)}>{f.label}</button>
-                ))}
-                <span className="km-file-count">{displayDocs.length} 个文件{subFolders.length > 0 && !searchQuery ? `，${subFolders.length} 个文件夹` : ''}</span>
             </div>
+            
+            {/* ===== 右侧内容区 ===== */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '0 0 0 20px' }}>
+                {/* ===== Toolbar ===== */}
+                <div className="km-toolbar">
+                    <div className="km-toolbar-left">
+                        <button className="btn btn-primary km-upload-btn" style={{borderRadius: 8 }} onClick={() => setUploadOpen(true)}>
+                            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
+                            手工上传
+                        </button>
+                        {selected.size > 0 && (
+                            <>
+                                <button className="btn btn-outline km-action-btn" onClick={openMoveDialog}>
+                                    <svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 12h14" /><path d="M12 5l7 7-7 7" /></svg>
+                                    移动 ({selected.size})
+                                </button>
+                                <button className="btn btn-danger km-action-btn" onClick={handleBatchDelete}>
+                                    <svg viewBox="0 0 24 24" width="15" height="15"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+                                    删除 ({selected.size})
+                                </button>
+                            </>
+                        )}
+                    </div>
+                    <div className="km-toolbar-right">
+                        <div className="km-search">
+                            <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                            <input type="text" placeholder="搜索文件..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                        </div>
+                        <div className="km-view-toggle">
+                            <button className={`km-view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} title="列表视图">
+                                <svg viewBox="0 0 24 24" width="16" height="16"><line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+                            </button>
+                            <button className={`km-view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title="网格视图">
+                                <svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* ===== Breadcrumb ===== */}
+                {!searchQuery && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 8, fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                        {breadcrumb.map((crumb, i) => (
+                            <span key={crumb.id ?? 'root'} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                {i > 0 && <span style={{ opacity: 0.4 }}>/</span>}
+                                <span
+                                    style={{ cursor: i < breadcrumb.length - 1 ? 'pointer' : 'default', color: i < breadcrumb.length - 1 ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: i === breadcrumb.length - 1 ? 500 : 400 }}
+                                    onClick={() => i < breadcrumb.length - 1 && setCurrentFolderId(crumb.id)}
+                                >
+                                    {crumb.name}
+                                </span>
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                {/* ===== Type Filters ===== */}
+                <div className="km-type-filters" style={{ marginLeft: 0 }}>
+                    {typeFilters.map(f => (
+                        <button key={f.key} className={`km-type-chip ${typeFilter === f.key ? 'active' : ''}`} onClick={() => setTypeFilter(f.key)}>{f.label}</button>
+                    ))}
+                    <span className="km-file-count">{displayDocs.length} 个文件</span>
+                </div>
 
             {/* ===== Content ===== */}
             {loading ? (
                 <div style={{ textAlign: 'center', padding: 60, color: 'var(--color-text-muted)' }}>加载中...</div>
             ) : (
                 <>
-                    {/* Sub-folders grid (only when not searching) */}
-                    {!searchQuery && subFolders.length > 0 && (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 10, marginBottom: 20 }}>
-                            {subFolders.map(f => (
-                                <div
-                                    key={f.id}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
-                                        background: 'var(--color-bg-primary, #fff)', border: '1px solid var(--color-border-light, #e5e7eb)',
-                                        borderRadius: 2, cursor: 'pointer', userSelect: 'none', position: 'relative',
-                                        transition: 'box-shadow 0.15s',
-                                    }}
-                                    onClick={() => setCurrentFolderId(f.id)}
-                                    onMouseEnter={e => e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)'}
-                                    onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
-                                >
-                                    <FolderIcon size={22} />
-                                    <div style={{ flex: 1, minWidth: 0 }}>
-                                        <div style={{ fontSize: 13, fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{f.name}</div>
-                                        <div style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>{f.doc_count} 个文件</div>
-                                    </div>
-                                    <button
-                                        title="删除文件夹"
-                                        style={{ opacity: 0, position: 'absolute', right: 8, top: 8, background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', padding: 2 }}
-                                        className="folder-del-btn"
-                                        onClick={e => { e.stopPropagation(); handleDeleteFolder(f.id); }}
-                                    >
-                                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" strokeWidth="2">
-                                            <polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-
                     {/* File list/grid */}
-                    {displayDocs.length === 0 && subFolders.length === 0 ? (
+                    {displayDocs.length === 0 ? (
                         <EmptyState icon="📂" title={searchQuery ? '未找到匹配的文件' : '暂无文件'} desc={searchQuery ? '请尝试其他搜索词' : '点击上传按钮添加文件'} />
-                    ) : displayDocs.length === 0 ? null : viewMode === 'list' ? (
+                    ) : viewMode === 'list' ? (
                         <div className="km-table-wrap">
                             <table className="km-table">
                                 <thead>
@@ -438,6 +607,7 @@ export default function Documents() {
                     )}
                 </>
             )}
+            </div>
 
             {/* ===== Context Menu ===== */}
             {contextMenu && (
@@ -467,10 +637,10 @@ export default function Documents() {
                 <><button className="btn btn-outline" onClick={() => setUploadOpen(false)}>取消</button><button className="btn btn-primary" onClick={handleUpload}>上传</button></>
             }>
                 <div className="form-group">
-                    <label className="form-label">选择文件</label>
-                    <input ref={fileRef} type="file" accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt" className="form-input" style={{ lineHeight: '38px', padding: '0 8px' }} />
+                    <label className="form-label">选择文件（可多选）</label>
+                    <input ref={fileRef} type="file" multiple accept=".doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png,.gif,.bmp,.mp3,.mp4,.webm" className="form-input" style={{ lineHeight: '38px', padding: '0 8px' }} />
                     {currentFolder && <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-primary)' }}>📁 将上传到「{currentFolder.name}」</div>}
-                    <div style={{ marginTop: 6, fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>支持格式: DOC, DOCX, PDF, XLS, XLSX, PPT, PPTX, TXT</div>
+                    <div style={{ marginTop: 6, fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>支持格式: DOC, DOCX, PDF, XLS, XLSX, PPT, PPTX, TXT, JPG, PNG, GIF, MP3, MP4</div>
                 </div>
             </Modal>
 
@@ -526,8 +696,8 @@ export default function Documents() {
                 </div>
             </Modal>
 
-            {/* folder delete button hover CSS */}
-            <style>{`.folder-del-btn { opacity: 0 !important; transition: opacity 0.15s; } div:hover > .folder-del-btn { opacity: 1 !important; }`}</style>
+            {/* 树形文件夹删除按钮悬停样式 */}
+            <style>{`.tree-folder-del-btn { opacity: 0 !important; transition: opacity 0.15s; } .tree-node:hover .tree-folder-del-btn { opacity: 1 !important; }`}</style>
         </div>
     );
 }
