@@ -275,11 +275,14 @@ class RecycleBin(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), index=True)
     document_id = Column(Integer, ForeignKey("documents.id"), index=True)
+    original_folder_id = Column(Integer, ForeignKey("document_folders.id"), nullable=True)  # 原始文件夹ID
 
     deleted_at = Column(DateTime, default=datetime.utcnow)
     expire_at = Column(DateTime, nullable=True)  # 30天后自动清理
 
     user = relationship("User")
+    document = relationship("Document")
+    original_folder = relationship("DocumentFolder")
 
 
 class ConsistencyCheck(Base):

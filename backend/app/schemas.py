@@ -292,6 +292,7 @@ class RecycleBinOut(BaseModel):
     id: int
     user_id: int
     document_id: int
+    original_folder_id: Optional[int] = None
     deleted_at: Optional[datetime] = None
     expire_at: Optional[datetime] = None
 

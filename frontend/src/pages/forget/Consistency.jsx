@@ -31,7 +31,7 @@ export default function Consistency() {
     return (
         <div className="page-enter">
             <div className="toolbar">
-                <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>✅ 一致性检查</h2>
+                <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>一致性检查</h2>
             </div>
 
             {items.length === 0 ? (

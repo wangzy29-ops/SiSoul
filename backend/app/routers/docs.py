@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -126,44 +127,30 @@ async def update_document_content(
 
 @router.delete("/{doc_id}")
 async def delete_document(doc_id: int, db: Session = Depends(get_db)):
+    """删除文档 - 移入回收站"""
     doc = db.query(Document).filter(Document.id == doc_id).first()
     if not doc:
         raise HTTPException(status_code=404, detail="文档不存在")
 
-    # 删除向量
-    chunks = db.query(Chunk).filter(Chunk.document_id == doc_id).all()
-    chunk_ids = [f"chunk-{doc_id}-{c.id}" for c in chunks]
-    if chunk_ids:
-        try:
-            collection = get_collection()
-            collection.delete(ids=chunk_ids)
-        except Exception:
-            pass
+    # 检查是否已在回收站
+    from ..models.core import RecycleBin
+    existing = db.query(RecycleBin).filter(RecycleBin.document_id == doc_id).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="文档已在回收站")
 
-    # 清除外键约束记录
-    from ..models.core import Message, Annotation, RecycleBin, ConsistencyCheck
+    # 移入回收站（保留文档，只添加回收站记录）
+    expire_at = datetime.utcnow() + timedelta(days=30)
+    recycle_item = RecycleBin(
+        user_id=doc.user_id,
+        document_id=doc_id,
+        original_folder_id=doc.folder_id,  # 保存原始文件夹
+        deleted_at=datetime.utcnow(),
+        expire_at=expire_at,
+    )
+    db.add(recycle_item)
     
-    # 消息解除关联
-    db.query(Message).filter(Message.related_doc_id == doc_id).update({Message.related_doc_id: None})
+    # 清除文档的 folder_id，使其从正常列表中消失
+    doc.folder_id = None
     
-    # 删除其他关联记录
-    db.query(Annotation).filter(Annotation.document_id == doc_id).delete()
-    db.query(RecycleBin).filter(RecycleBin.document_id == doc_id).delete()
-    db.query(ConsistencyCheck).filter(
-        (ConsistencyCheck.doc_id_1 == doc_id) | (ConsistencyCheck.doc_id_2 == doc_id)
-    ).delete()
-    
-    # 删除内容和分块
-    db.query(Chunk).filter(Chunk.document_id == doc_id).delete()
-    db.query(DocumentContent).filter(DocumentContent.document_id == doc_id).delete()
-
-    # 删除本地文件
-    if doc.original_path and os.path.exists(doc.original_path):
-        try:
-            os.remove(doc.original_path)
-        except Exception:
-            pass
-
-    db.delete(doc)
     db.commit()
-    return {"detail": "删除成功"}
+    return {"detail": "已移入回收站"}
